@@ -1,0 +1,1 @@
+json.extract! @host, :id, :name, :email-id, :phone, :dob, :card_type, :card_no, :marital_status, :qualification, :profession, :favmusic, :favmovie, :socialprofile, :languages, :favdestination, :amenities, :personalitytype, :descriptionexp, :descriptionself, :rating, :membership, :created_at, :updated_at

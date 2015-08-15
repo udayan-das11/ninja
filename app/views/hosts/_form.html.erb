@@ -1,0 +1,97 @@
+<%= form_for(@host) do |f| %>
+  <% if @host.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@host.errors.count, "error") %> prohibited this host from being saved:</h2>
+
+      <ul>
+      <% @host.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email-id %><br>
+    <%= f.text_field :email-id %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.number_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :dob %><br>
+    <%= f.text_field :dob %>
+  </div>
+  <div class="field">
+    <%= f.label :card_type %><br>
+    <%= f.text_field :card_type %>
+  </div>
+  <div class="field">
+    <%= f.label :card_no %><br>
+    <%= f.text_field :card_no %>
+  </div>
+  <div class="field">
+    <%= f.label :marital_status %><br>
+    <%= f.text_field :marital_status %>
+  </div>
+  <div class="field">
+    <%= f.label :qualification %><br>
+    <%= f.text_field :qualification %>
+  </div>
+  <div class="field">
+    <%= f.label :profession %><br>
+    <%= f.text_field :profession %>
+  </div>
+  <div class="field">
+    <%= f.label :favmusic %><br>
+    <%= f.text_field :favmusic %>
+  </div>
+  <div class="field">
+    <%= f.label :favmovie %><br>
+    <%= f.text_field :favmovie %>
+  </div>
+  <div class="field">
+    <%= f.label :socialprofile %><br>
+    <%= f.text_field :socialprofile %>
+  </div>
+  <div class="field">
+    <%= f.label :languages %><br>
+    <%= f.text_field :languages %>
+  </div>
+  <div class="field">
+    <%= f.label :favdestination %><br>
+    <%= f.text_field :favdestination %>
+  </div>
+  <div class="field">
+    <%= f.label :amenities %><br>
+    <%= f.text_field :amenities %>
+  </div>
+  <div class="field">
+    <%= f.label :personalitytype %><br>
+    <%= f.text_field :personalitytype %>
+  </div>
+  <div class="field">
+    <%= f.label :descriptionexp %><br>
+    <%= f.text_field :descriptionexp %>
+  </div>
+  <div class="field">
+    <%= f.label :descriptionself %><br>
+    <%= f.text_field :descriptionself %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br>
+    <%= f.text_field :rating %>
+  </div>
+  <div class="field">
+    <%= f.label :membership %><br>
+    <%= f.text_field :membership %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @order_table.date %>
+</p>
+
+<p>
+  <strong>Timeslotfrom:</strong>
+  <%= @order_table.timeslotfrom %>
+</p>
+
+<p>
+  <strong>Timeslotto:</strong>
+  <%= @order_table.timeslotto %>
+</p>
+
+<p>
+  <strong>Customization:</strong>
+  <%= @order_table.customization %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order_table.status %>
+</p>
+
+<p>
+  <strong>Paymentid:</strong>
+  <%= @order_table.paymentid %>
+</p>
+
+<p>
+  <strong>References:</strong>
+  <%= @order_table.references %>
+</p>
+
+<p>
+  <strong>References:</strong>
+  <%= @order_table.references %>
+</p>
+
+<%= link_to 'Edit', edit_order_table_path(@order_table) %> |
+<%= link_to 'Back', order_tables_path %>

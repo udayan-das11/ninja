@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Hosts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email-id</th>
+      <th>Phone</th>
+      <th>Dob</th>
+      <th>Card type</th>
+      <th>Card no</th>
+      <th>Marital status</th>
+      <th>Qualification</th>
+      <th>Profession</th>
+      <th>Favmusic</th>
+      <th>Favmovie</th>
+      <th>Socialprofile</th>
+      <th>Languages</th>
+      <th>Favdestination</th>
+      <th>Amenities</th>
+      <th>Personalitytype</th>
+      <th>Descriptionexp</th>
+      <th>Descriptionself</th>
+      <th>Rating</th>
+      <th>Membership</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hosts.each do |host| %>
+      <tr>
+        <td><%= host.name %></td>
+        <td><%= host.email-id %></td>
+        <td><%= host.phone %></td>
+        <td><%= host.dob %></td>
+        <td><%= host.card_type %></td>
+        <td><%= host.card_no %></td>
+        <td><%= host.marital_status %></td>
+        <td><%= host.qualification %></td>
+        <td><%= host.profession %></td>
+        <td><%= host.favmusic %></td>
+        <td><%= host.favmovie %></td>
+        <td><%= host.socialprofile %></td>
+        <td><%= host.languages %></td>
+        <td><%= host.favdestination %></td>
+        <td><%= host.amenities %></td>
+        <td><%= host.personalitytype %></td>
+        <td><%= host.descriptionexp %></td>
+        <td><%= host.descriptionself %></td>
+        <td><%= host.rating %></td>
+        <td><%= host.membership %></td>
+        <td><%= link_to 'Show', host %></td>
+        <td><%= link_to 'Edit', edit_host_path(host) %></td>
+        <td><%= link_to 'Destroy', host, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Host', new_host_path %>

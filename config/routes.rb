@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :items
+  resources :menus
+  resources :order_tables
+  resources :users
+  resources :image_gallaries
+  resources :hosts
   get 'ninja/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

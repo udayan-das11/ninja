@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @image_gallary.image_id %>
+</p>
+
+<p>
+  <strong>References:</strong>
+  <%= @image_gallary.references %>
+</p>
+
+<%= link_to 'Edit', edit_image_gallary_path(@image_gallary) %> |
+<%= link_to 'Back', image_gallaries_path %>
