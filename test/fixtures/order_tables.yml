@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: MyString
+  timeslotfrom: MyString
+  timeslotto: MyString
+  customization: MyString
+  status: MyString
+  paymentid: MyString
+  Host_id: 
+  User_id: 
+
+two:
+  date: MyString
+  timeslotfrom: MyString
+  timeslotto: MyString
+  customization: MyString
+  status: MyString
+  paymentid: MyString
+  Host_id: 
+  User_id: 

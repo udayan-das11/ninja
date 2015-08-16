@@ -69,6 +69,6 @@ class OrderTablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_table_params
-      params.require(:order_table).permit(:date, :timeslotfrom, :timeslotto, :customization, :status, :paymentid, :references, :references)
+      params.require(:order_table).permit(:date, :timeslotfrom, :timeslotto, :customization, :status, :paymentid, :Host_id, :User_id)
     end
 end

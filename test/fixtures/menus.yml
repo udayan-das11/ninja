@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  menuType: MyString
+  experience: MyString
+  Host_id: 
+
+two:
+  menuType: MyString
+  experience: MyString
+  Host_id: 

@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Image</th>
-      <th>References</th>
+      <th>Host</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% @image_gallaries.each do |image_gallary| %>
       <tr>
         <td><%= image_gallary.image_id %></td>
-        <td><%= image_gallary.references %></td>
+        <td><%= image_gallary.Host %></td>
         <td><%= link_to 'Show', image_gallary %></td>
         <td><%= link_to 'Edit', edit_image_gallary_path(image_gallary) %></td>
         <td><%= link_to 'Destroy', image_gallary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
