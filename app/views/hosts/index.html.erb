@@ -33,7 +33,7 @@
     <% @hosts.each do |host| %>
       <tr>
         <td><%= host.name %></td>
-        <td><%= host.email-id %></td>
+        <td><%= host.email_id %></td>
         <td><%= host.phone %></td>
         <td><%= host.dob %></td>
         <td><%= host.card_type %></td>
@@ -61,5 +61,22 @@
 </table>
 
 <br>
+<%= link_to 'New Host', '#signup', 'data-toggle' => 'modal', class: 'btn btn-default ' %>
+<!--<%= link_to 'New Host', new_host_path %>-->
 
-<%= link_to 'New Host', new_host_path %>
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">SignUp</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= render 'form', modal: true %>
+      </div>
+    </div>
+  </div>
+</div>    <!--  ( Create )-->

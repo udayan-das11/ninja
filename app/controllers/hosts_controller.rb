@@ -5,6 +5,7 @@ class HostsController < ApplicationController
   # GET /hosts.json
   def index
     @hosts = Host.all
+    @host=Host.new
   end
 
   # GET /hosts/1
@@ -69,6 +70,6 @@ class HostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
-      params.require(:host).permit(:name, :email-id, :phone, :dob, :card_type, :card_no, :marital_status, :qualification, :profession, :favmusic, :favmovie, :socialprofile, :languages, :favdestination, :amenities, :personalitytype, :descriptionexp, :descriptionself, :rating, :membership)
+      params.require(:host).permit(:name, :email_id, :phone, :dob, :card_type, :card_no, :marital_status, :qualification, :profession, :favmusic, :favmovie, :socialprofile, :languages, :favdestination, :amenities, :personalitytype, :descriptionexp, :descriptionself, :rating, :membership)
     end
 end
