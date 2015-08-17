@@ -2,7 +2,7 @@ class CreateHosts < ActiveRecord::Migration
   def change
     create_table :hosts do |t|
       t.string :name
-      t.string :email-id
+      t.string :email_id
       t.integer :phone
       t.string :dob
       t.string :card_type
