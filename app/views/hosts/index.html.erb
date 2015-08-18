@@ -210,14 +210,15 @@
             <h2 class="StepTitle">Step 4 Content</h2>	
 	        <div style='width: 100%'>
 	          <div id="mapconfirmlocation" style='width: 100%; height: 250px;'></div>
-			  <div id="latlng">
-	        </div>             			
+			  <div id="latlng"></div>
 			<li onclick="myFunction()">We will try to find your location. If your location is not the one in the map, please pick the correct location on the map</li>
-        </div>
-    </div>
+            </div>
+         </div>
+      </div>
     <!-- End SmartWizard Content -->
 
   </td></tr>
+
 </table>
 <% end %>
 </div>
@@ -233,22 +234,22 @@ var mlng;
 var hiddenLAt;
 var hiddenLng;
 	function myFunction() {
-	
+
 	    var parentDiv = document.getElementById('latlng');
-		hiddenLat = document.createElement('input'); 			
+		hiddenLat = document.createElement('input');
 		hiddenLat.setAttribute('type','hidden');
 		hiddenLat.setAttribute('name','lat');
-		
+
 		parentDiv.appendChild(hiddenLat);
-		
-		hiddenLng = document.createElement('input'); 			
+
+		hiddenLng = document.createElement('input');
 		hiddenLng.setAttribute('type','hidden');
 		hiddenLng.setAttribute('name','lng');
-		
+
 		parentDiv.appendChild(hiddenLng);
-		
+
 		handler = Gmaps.build('Google');
-		
+
 		handler.buildMap({ internal: {id: 'mapconfirmlocation'} }, function(){
 		  if(navigator.geolocation)
 		    navigator.geolocation.getCurrentPosition(displayOnMap);
@@ -266,22 +267,22 @@ var hiddenLng;
 		  handler.map.centerOn(marker);
 		  handler.getMap().setZoom(14);
 		  		google.maps.event.addListener(handler.getMap(), 'click', function(event) {
-			handler.removeMarker(marker);	
+			handler.removeMarker(marker);
 			var myLatLng = event.latLng;
 		    var lat = myLatLng.lat();
 		    var lng = myLatLng.lng();
 			marker = handler.addMarker({
 		    lat: lat,
 		    lng: lng
-			}); 
+			});
 			mlat=marker.serviceObject.position.k;
 			mlng=marker.serviceObject.position.D
 			hiddenLng.setAttribute('value',mlng);
 			hiddenLat.setAttribute('value',mlat);
 			//handler.map.centerOn(marker);
-			
+
 		});
 		}
-	}   
-	
+	}
+
 </script>

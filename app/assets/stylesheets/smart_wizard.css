@@ -15,6 +15,13 @@
   overflow:visible;
   float:left;
   width:980px;
+
+}
+
+
+#main-content{
+    height:593px;
+    background-image: url("gs.png");
 }
 .swMain .stepContainer {
   display:block;
