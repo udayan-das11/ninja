@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :image_gallaries
   resources :hosts
   resources :users
-  get 'ninja/index'
+  get 'hosts/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  get 'ninja/index'
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'hosts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
