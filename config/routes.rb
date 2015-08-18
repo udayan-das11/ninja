@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :hosts
   resources :items
   resources :menus
   resources :order_tables
   resources :image_gallaries
-  resources :hosts
   resources :users
   get 'hosts/index'
 
