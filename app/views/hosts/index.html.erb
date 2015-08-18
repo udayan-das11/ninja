@@ -92,20 +92,18 @@
 
   <tr><td>
     <!-- Smart Wizard -->
-    <div id="wizard" class="swMain" style="height:600px">
+    <div id="wizard" class="swMain">
       <ul>
         <li><a href="#step-1">
           <span class="stepNumber">1</span>
                 <span class="stepDesc">
-                   Step 1<br />
-                   <small>Step 1 description</small>
+                 Enter your details
                 </span>
         </a></li>
         <li><a href="#step-2">
           <span class="stepNumber">2</span>
                 <span class="stepDesc">
-                   Step 2<br />
-                   <small>Step 2 description</small>
+                 Hobbies and Interests
                 </span>
         </a></li>
         <li><a href="#step-3">
@@ -119,76 +117,69 @@
       </ul>
       <div id="step-1">
         <h2 class="StepTitle">Personal Details</h2>
-        <div class="field">
-          <%= f.label :name %><br>
-          <%= f.text_field :name %>
+
+         <div class="form-group">
+          <%= f.label :name , class: 'control-label'%><br>
+          <%= f.text_field :name , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :addr %><br>
-          <%= f.text_field :addr %>
+         <div class="form-group">
+          <%= f.label :address , class: 'control-label'%><br>
+          <%= f.text_field :addr, class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :lat %><br>
-          <%= f.text_field :lat %>
+         <div class="form-group">
+          <%= f.label :age , class: 'control-label'%><br>
+          <%= f.number_field :age , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :longi %><br>
-          <%= f.text_field :longi %>
+         <div class="form-group">
+          <%= f.label :phone_no , class: 'control-label'%><br>
+          <%= f.text_field :phoneno , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :age %><br>
-          <%= f.number_field :age %>
+         <div class="form-group">
+          <%= f.label :qualification , class: 'control-label'%><br>
+          <%= f.text_field :qualification , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :phoneno %><br>
-          <%= f.text_field :phoneno %>
+         <div class="form-group">
+          <%= f.label :profession , class: 'control-label'%><br>
+          <%= f.text_field :profession , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :qualification %><br>
-          <%= f.text_field :qualification %>
+         <div class="form-group">
+          <%= f.label :languages , class: 'control-label'%><br>
+          <%= f.text_field :languages , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :profession %><br>
-          <%= f.text_field :profession %>
+         <div class="form-group">
+          <%= f.label :blog , class: 'control-label'%><br>
+          <%= f.text_field :blog , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :languages %><br>
-          <%= f.text_field :languages %>
+         <div class="form-group">
+          <%= f.label :id_card , class: 'control-label'%><br>
+          <%= f.text_field :idcard , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :blog %><br>
-          <%= f.text_field :blog %>
-        </div>
-        <div class="field">
-          <%= f.label :idcard %><br>
-          <%= f.text_field :idcard %>
-        </div>
-        <div class="field">
-          <%= f.label :cardtype %><br>
-          <%= f.text_field :cardtype %>
+         <div class="form-group">
+          <%= f.label :card_type , class: 'control-label'%><br>
+          <%= f.text_field :cardtype , class: 'form-control'  %>
         </div>
       </div>
       <div id="step-2">
         <h2 class="StepTitle">Intersts and Hobbies</h2>
-        <div class="field">
-          <%= f.label :food %><br>
-          <%= f.text_field :food %>
+         <div class="form-group">
+          <%= f.label :food , class: 'control-label'%><br>
+          <%= f.text_field :food , class: 'form-control' %>
         </div>
-        <div class="field">
-          <%= f.label :destination %><br>
-          <%= f.text_field :destination %>
+         <div class="form-group">
+          <%= f.label :destination , class: 'control-label'%><br>
+          <%= f.text_field :destination , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :toddlrReason %><br>
-          <%= f.text_field :toddlrReason %>
+         <div class="form-group">
+          <%= f.label :why_you_want_to_join_toddlr_? , class: 'control-label'%><br>
+          <%= f.text_field :toddlrReason, class: 'form-control'   %>
         </div>
-        <div class="field">
-          <%= f.label :reasonToenjycooking %><br>
-          <%= f.text_field :reasonToenjycooking %>
+         <div class="form-group">
+          <%= f.label :reason_to_enjoy_cooking , class: 'control-label'%><br>
+          <%= f.text_field :reasonToenjycooking , class: 'form-control'  %>
         </div>
-        <div class="field">
-          <%= f.label :frequencyofCooking %><br>
-          <%= f.text_field :frequencyofCooking %>
+         <div class="form-group">
+          <%= f.label :how_frequently_do_you_cook_in_a_week_? , class: 'control-label'%><br>
+          <%= f.text_field :frequencyofCooking , class: 'form-control'  %>
         </div>
       </div>
       <div id="step-3">
