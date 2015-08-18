@@ -5,6 +5,7 @@ class HostsController < ApplicationController
   # GET /hosts.json
   def index
     @hosts = Host.all
+    @host = Host.new
   end
 
   # GET /hosts/1
