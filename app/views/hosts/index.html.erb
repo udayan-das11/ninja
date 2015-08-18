@@ -75,7 +75,7 @@
         }
     });
 </script>
-
+<div id="main-content">
 <%= form_for(@host) do |f| %>
     <% if @host.errors.any? %>
         <div id="error_explanation">
@@ -109,81 +109,82 @@
         <li><a href="#step-3">
           <span class="stepNumber">3</span>
                 <span class="stepDesc">
-                   Step 3<br />
-                   <small>Step 3 description</small>
+                   Personality Quiz
                 </span>
         </a></li>
 
       </ul>
       <div id="step-1">
         <h2 class="StepTitle">Personal Details</h2>
+<br>
+         <div class="form-group">
 
-         <div class="form-group">
-          <%= f.label :name , class: 'control-label'%><br>
-          <%= f.text_field :name , class: 'form-control'  %>
+          <%= f.text_field :name , class: 'fieldValue' ,:placeholder=>'Name' %>
         </div>
          <div class="form-group">
-          <%= f.label :address , class: 'control-label'%><br>
-          <%= f.text_field :addr, class: 'form-control'  %>
+
+          <%= f.text_field :addr, class: 'fieldValue' ,:placeholder=>'Address' %>
         </div>
          <div class="form-group">
-          <%= f.label :age , class: 'control-label'%><br>
-          <%= f.number_field :age , class: 'form-control'  %>
+
+          <%= f.number_field :age , class: 'fieldValue',:placeholder=>'Age'  %>
         </div>
          <div class="form-group">
-          <%= f.label :phone_no , class: 'control-label'%><br>
-          <%= f.text_field :phoneno , class: 'form-control'  %>
+
+          <%= f.text_field :phoneno , class: 'fieldValue' ,:placeholder=>'Phone Number' %>
         </div>
          <div class="form-group">
-          <%= f.label :qualification , class: 'control-label'%><br>
-          <%= f.text_field :qualification , class: 'form-control'  %>
+
+          <%= f.text_field :qualification , class: 'fieldValue',:placeholder=>'Qualification'  %>
         </div>
          <div class="form-group">
-          <%= f.label :profession , class: 'control-label'%><br>
-          <%= f.text_field :profession , class: 'form-control'  %>
+
+          <%= f.text_field :profession , class: 'fieldValue' ,:placeholder=>'Profession' %>
         </div>
          <div class="form-group">
-          <%= f.label :languages , class: 'control-label'%><br>
-          <%= f.text_field :languages , class: 'form-control'  %>
+
+          <%= f.text_field :languages , class: 'fieldValue' ,:placeholder=>'Languages' %>
         </div>
          <div class="form-group">
-          <%= f.label :blog , class: 'control-label'%><br>
-          <%= f.text_field :blog , class: 'form-control'  %>
+
+          <%= f.text_field :blog , class: 'fieldValue' ,:placeholder=>'Blog' %>
         </div>
          <div class="form-group">
-          <%= f.label :id_card , class: 'control-label'%><br>
-          <%= f.text_field :idcard , class: 'form-control'  %>
+
+          <%= f.text_field :idcard , class: 'fieldValue'  ,:placeholder=>'Id Card'%>
         </div>
          <div class="form-group">
-          <%= f.label :card_type , class: 'control-label'%><br>
-          <%= f.text_field :cardtype , class: 'form-control'  %>
+
+          <%= f.text_field :cardtype , class: 'fieldValue' ,:placeholder=>'Card Type' %>
         </div>
       </div>
       <div id="step-2">
+        <br>
         <h2 class="StepTitle">Intersts and Hobbies</h2>
          <div class="form-group">
-          <%= f.label :food , class: 'control-label'%><br>
-          <%= f.text_field :food , class: 'form-control' %>
+
+          <%= f.text_field :food , class: 'fieldValue',:placeholder=>'Food' %>
         </div>
          <div class="form-group">
-          <%= f.label :destination , class: 'control-label'%><br>
-          <%= f.text_field :destination , class: 'form-control'  %>
+
+          <%= f.text_field :destination , class: 'fieldValue' ,:placeholder=>'Destination' %>
         </div>
          <div class="form-group">
-          <%= f.label :why_you_want_to_join_toddlr_? , class: 'control-label'%><br>
-          <%= f.text_field :toddlrReason, class: 'form-control'   %>
+
+          <%= f.text_field :toddlrReason, class: 'fieldValue'  ,:placeholder=>'Why do you want to join toddlr?' %>
         </div>
          <div class="form-group">
-          <%= f.label :reason_to_enjoy_cooking , class: 'control-label'%><br>
-          <%= f.text_field :reasonToenjycooking , class: 'form-control'  %>
+
+          <%= f.text_field :reasonToenjycooking , class: 'fieldValue',:placeholder=>'Reason to enjoy cooking'  %>
         </div>
          <div class="form-group">
-          <%= f.label :how_frequently_do_you_cook_in_a_week_? , class: 'control-label'%><br>
-          <%= f.text_field :frequencyofCooking , class: 'form-control'  %>
+
+          <%= f.text_field :frequencyofCooking , class: 'fieldValue',:placeholder=>'Frequency of cooking'  %>
         </div>
       </div>
       <div id="step-3">
         <h2 class="StepTitle">Personality Quiz</h2>
+        <br>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -205,3 +206,4 @@
   </td></tr>
 </table>
 <% end %>
+</div>
