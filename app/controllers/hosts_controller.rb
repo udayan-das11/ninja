@@ -6,11 +6,13 @@ class HostsController < ApplicationController
   def index
     @hosts = Host.all
     @host = Host.new
+	@hostID = 1;
   end
 
   # GET /hosts/1
   # GET /hosts/1.json
   def show
+   
   end
 
   # GET /hosts/new
@@ -25,17 +27,31 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    @host = Host.new(host_params)
-
-    respond_to do |format|
-      if @host.save
-        format.html { redirect_to @host, notice: 'Host was successfully created.' }
-        format.json { render :show, status: :created, location: @host }
-      else
-        format.html { render :new }
-        format.json { render json: @host.errors, status: :unprocessable_entity }
-      end
-    end
+    if (!Host.exists?(emailid: params[:host][:emailid]))
+	    mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
+		myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
+		if (mypass==myconfPass) 
+		    @host = Host.new(username:params[:host][:username], emailid:params[:host][:emailid], passwd:mypass, confpasswrd:myconfPass)
+		    @host.save
+			session[:hostId]=@host.emailid
+		else
+		    flash[:error] = "Passwords do not match"
+		end
+		redirect_to :action => "index", :controller => "hosts"
+	else
+	    @host = Host.find_by_emailid(session[:hostId])
+		@host.update(lat:params[:lat],longi:params[:lng])
+		puts('#######')
+	    respond_to do |format|
+	      if @host.update(host_params)
+	        format.html { redirect_to @host, notice: 'Host was successfully created.' }
+	        format.json { render :show, status: :created, location: @host }
+	      else
+	        format.html { render :new }
+	        format.json { render json: @host.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
   end
 
   # PATCH/PUT /hosts/1
@@ -51,7 +67,17 @@ class HostsController < ApplicationController
       end
     end
   end
-
+  def loginFB
+    @host = Host.omniauth(env['omniauth.auth'])
+	if (@host.lat==nil)
+	    puts('&&&&&&&&&&&&&')
+	    redirect_to :action => "create", :controller => "hosts"
+	else
+	    puts('$$$$$$$$$$$$$$$ yo buddy')
+	    session[:hostId]=@host.emailid
+	    redirect_to :action => "show", :controller => "ninja"
+    end
+  end
   # DELETE /hosts/1
   # DELETE /hosts/1.json
   def destroy
@@ -70,6 +96,6 @@ class HostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
-      params.require(:host).permit(:username, :emailid, :passwd, :confpasswrd, :name, :addr, :lat, :longi, :age, :phoneno, :qualification, :profession, :languages, :blog, :idcard, :cardtype, :food, :destination, :toddlrReason, :reasonToenjycooking, :frequencyofCooking)
+      params.require(:host).permit(:name, :addr, :lat, :longi, :age, :phoneno, :qualification, :profession, :languages, :blog, :idcard, :cardtype, :food, :destination, :toddlrReason, :reasonToenjycooking, :frequencyofCooking)
     end
 end

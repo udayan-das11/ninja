@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :image_gallaries
   resources :users
   get 'hosts/index'
-
+  get 'ninja/show'
+	get 'auth/:provider/callback', to: 'hosts#loginFB'
+	get 'logout', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get 'ninja/index'
