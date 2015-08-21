@@ -11,34 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817170826) do
+ActiveRecord::Schema.define(version: 20150821191454) do
 
-  create_table "hosts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email_id"
-    t.integer  "phone"
-    t.string   "dob"
-    t.string   "card_type"
-    t.string   "card_no"
-    t.string   "marital_status"
-    t.string   "qualification"
-    t.string   "profession"
-    t.string   "favmusic"
-    t.string   "favmovie"
-    t.string   "socialprofile"
-    t.string   "languages"
-    t.string   "favdestination"
-    t.string   "amenities"
-    t.string   "personalitytype"
-    t.string   "descriptionexp"
-    t.string   "descriptionself"
-    t.string   "rating"
-    t.string   "membership"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "latitude"
-    t.string   "logitude"
-  end
+# Could not dump table "hosts" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "image_gallaries", force: :cascade do |t|
     t.string   "image_id"

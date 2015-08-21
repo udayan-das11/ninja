@@ -1,12 +1,14 @@
-Rails.application.routes.draw do
-  resources :hosts
+﻿Rails.application.routes.draw do
   resources :items
   resources :menus
   resources :order_tables
   resources :image_gallaries
   resources :users
   get 'hosts/index'
+  get 'hosts/mainpage'
   get 'ninja/show'
+  get 'hosts/create'
+  post 'hosts/create'
 	get 'auth/:provider/callback', to: 'hosts#loginFB'
 	get 'logout', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
