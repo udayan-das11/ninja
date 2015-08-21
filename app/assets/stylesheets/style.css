@@ -645,3 +645,104 @@ nav#footer p{
     transform: rotate3d(0, 0, 1, 35deg);
 }
 
+.noti_bubble {
+    position:absolute;    /* This breaks the div from the normal HTML document. */
+    top: 0px;
+    right:0px;
+    padding:1px 2px 1px 2px;
+    background-color: white; /* you could use a background image if you'd like as well */
+    color:black;
+    font-weight:bold;
+    font-size:0.55em;
+
+    /* The following is CSS3, but isn't crucial for this technique to work. */
+    /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+    /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+    border-radius:60px;
+    box-shadow:1px 1px 1px gray;
+}
+
+a.arrow-button {
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6);
+    border-radius: 8px;
+}
+
+a.arrow-button:hover {
+    color: #eee;
+    background-color: #333;
+}
+
+.arrow-down::after {
+    content: '\25bc';
+    padding-left: 0.5em;
+}
+
+a.Calltooltip{
+    position: relative;
+    display: inline;
+}
+a.Calltooltip:after{
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    opacity: 0;
+    content: "<ul><li>For Guests</li><li>For Hosts</li></ul>"; /* might also use attr(title) */
+    height: auto;
+    min-width: 100px;
+    padding: 5px 8px;
+    z-index: 999;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background: rgba(0,0,0,0.85);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+a.Calltooltip:before {
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    left: 50%;
+    bottom: 0px;
+    opacity: 0;
+    content: "";
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: rgba(0,0,0,0.85) transparent transparent transparent;
+}
+a.Calltooltip:hover:after{ visibility: visible; opacity: 1; bottom: 20px; }
+a.Calltooltip:hover:before{ visibility: visible; opacity: 1; bottom: 14px; }
+
+a.Calltooltip.animate:after, a.Calltooltip.animate:before {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* tips on bottom */
+a.Calltooltip.bottom:after { bottom: auto; top: 0; }
+a.Calltooltip.bottom:hover:after { top: 28px; }
+a.Calltooltip.bottom:before {
+    border-width: 0 5px 8.7px 5px;
+    border-color: transparent transparent rgba(0,0,0,0.85) transparent;
+    top: 0px
+}
+a.Calltooltip.bottom:hover:before { top: 20px; }
+
+/* Calltooltip colors (add your own!) */
+a.Calltooltip.blue:after { background:#5f87c2; }
+a.Calltooltip.blue:before { border-color: #5f87c2 transparent transparent transparent; }
+a.Calltooltip.bottom.blue:before{ border-color: transparent transparent #5f87c2 transparent; }
+a.Calltooltip.right.blue:before { border-color: transparent #5f87c2 transparent transparent; }
+a.Calltooltip.left.blue:before { border-color: transparent transparent transparent #5f87c2; }
