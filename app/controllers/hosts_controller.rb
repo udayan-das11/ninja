@@ -4,9 +4,12 @@ class HostsController < ApplicationController
   # GET /hosts
   # GET /hosts.json
   def index
+    session[:hostid]=1
     @hosts = Host.all
     @host = Host.new
-	@hostID = 1;
+    @post_attachments = PostAttachment.find_by_host_id(1)
+    # @post_attachments = PostAttachment.all
+
   end
 
   # GET /hosts/1
@@ -22,6 +25,36 @@ class HostsController < ApplicationController
 
   # GET /hosts/1/edit
   def edit
+  end
+
+  #Photo Upload
+  def previewAlbum
+    @post_attachments = PostAttachment.find_by_sql('select * from post_attachments where host_id=1')
+    puts("6363635653536653356653635635653635653653"+"    "+@post_attachments.to_json)
+    respond_to do |format|
+      format.html
+      format.js {}
+      format.json {
+        render json: {:attachments => @post_attachments}
+      }
+    end
+  end
+
+  def create_photo
+    # @post_attachments=@host.post_attachments.all
+    puts("******************************************************");
+    puts( params[:file]);
+    @post_attachment =  PostAttachment.new(avatar: params[:file] , host_id:session[:hostid])
+
+    respond_to do |format|
+      if @post_attachment.save
+        format.html { redirect_to @host, notice: 'Post attachment was successfully created.' }
+        format.json { render :index, status: :created, location: @host }
+      else
+        format.html { render :new }
+        format.json { render json: @post_attachment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /hosts
