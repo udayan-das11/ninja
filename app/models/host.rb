@@ -2,7 +2,7 @@ class Host < ActiveRecord::Base
 
   has_many :post_attachments
   accepts_nested_attributes_for :post_attachments
-
+  has_many :menus
   def self.omniauth(auth)
     puts('########################')
     where(auth.slice(:emailid)).first_or_initialize.tap do |host|

@@ -1,4 +1,6 @@
 ﻿Rails.application.routes.draw do
+  resources :menu_attachments
+  resources :post_attachments
   resources :items
   resources :menus
   resources :order_tables
@@ -16,7 +18,8 @@
   get 'ninja/index'
   # You can have the root of your site routed with "root"
   root 'hosts#index'
-
+  post 'hosts/create_photo'
+  get 'hosts/previewAlbum'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Menu Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Menu</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menu_attachments.each do |menu_attachment| %>
+      <tr>
+        <td><%= menu_attachment.menu_id %></td>
+        <td><%= menu_attachment.avatar %></td>
+        <td><%= link_to 'Show', menu_attachment %></td>
+        <td><%= link_to 'Edit', edit_menu_attachment_path(menu_attachment) %></td>
+        <td><%= link_to 'Destroy', menu_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Menu attachment', new_menu_attachment_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Menu:</strong>
+  <%= @menu_attachment.menu_id %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @menu_attachment.avatar %>
+</p>
+
+<%= link_to 'Edit', edit_menu_attachment_path(@menu_attachment) %> |
+<%= link_to 'Back', menu_attachments_path %>
