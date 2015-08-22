@@ -22,8 +22,6 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				<li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
 					</li>
-				
-					
                     <li>
                         <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
@@ -71,7 +69,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                             </li>
                         </ul>
                       </li>  
-                  <li  >
+					<li>
                         <a  href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
                     </li>	
                 </ul>
@@ -97,8 +95,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-envelope-o"></i>
                 </span>
                 <div class="text-box" >
-                    <p class="main-text">120 New</p>
-                    <p class="text-muted">Messages</p>
+                    <p class="main-text">Dashboard</p>
                 </div>
              </div>
 		     </div>
@@ -108,8 +105,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-bars"></i>
                 </span>
                 <div class="text-box" >
-                    <p class="main-text">30 Tasks</p>
-                    <p class="text-muted">Remaining</p>
+                    <p class="main-text">Menu</p>
                 </div>
              </div>
 		     </div>
@@ -119,8 +115,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-bell-o"></i>
                 </span>
                 <div class="text-box" >
-                    <p class="main-text">240 New</p>
-                    <p class="text-muted">Notifications</p>
+                    <p class="main-text">Payment</p>
                 </div>
              </div>
 		     </div>
@@ -130,8 +125,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-rocket"></i>
                 </span>
                 <div class="text-box" >
-                    <p class="main-text">3 Orders</p>
-                    <p class="text-muted">Pending</p>
+                    <p class="main-text">Settigs</p>
                 </div>
              </div>
 		     </div>
@@ -523,34 +517,107 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 						var aTag = document.createElement('a');
 						aTag.setAttribute('class','active-menu');
 						aTag.setAttribute('href',"yourlink.htm");
-						var divIdName = 'Location'+inival;
-						newdiv.setAttribute('class','col-xs-5');
-						newdiv1.appendChild(newlab);
-						newdiv1.appendChild(newdiv);
-						var newText = document.createElement('input'); 			
-						newText.setAttribute('type','text');
-						newText.setAttribute('name',divIdName);
-						newText.setAttribute('class','form-control');
-						newText.setAttribute('placeholder','Locality Name');
-						newdiv.appendChild(newText);
+						aTag.innerHTML = "Meals Served";
+						newdiv1.appendChild(aTag);
+						
+						
+						var newdiv2 = document.createElement('li'); // Create dynamic element
+						var aTag2 = document.createElement('a');
+						aTag2.setAttribute('class','active-menu');
+						aTag2.setAttribute('href',"yourlink1.htm");
+						aTag2.innerHTML = "Reviews";
+						myMenu.appendChild(newdiv2);			
+						newdiv2.appendChild(aTag2);
+						
+						var newdiv3 = document.createElement('li'); // Create dynamic element
+						var aTag3 = document.createElement('a');
+						aTag3.setAttribute('class','active-menu');
+						aTag3.setAttribute('href',"yourlink2.htm");
+						aTag3.innerHTML = "Profile";
+						myMenu.appendChild(newdiv3);			
+						newdiv3.appendChild(aTag3);		
+
+						
+						var newdiv4 = document.createElement('li'); // Create dynamic element
+						var aTag4 = document.createElement('a');
+						aTag4.setAttribute('class','active-menu');
+						aTag4.setAttribute('href',"yourlink3.htm");
+						aTag4.innerHTML = "Help";
+						myMenu.appendChild(newdiv4);			
+						newdiv4.appendChild(aTag4);		
 						});
 
 						$("#menu").hover(function(){
-						    markers[2].setMap(handler.getMap()); //because clusterer removes map property from marker
-						    markers[2].panTo();
-						    google.maps.event.trigger(markers[2].getServiceObject(), 'click');
+						var myMenu=document.getElementById('main-menu')
+						$( myMenu).empty();
+						var newdiv1 = document.createElement('li'); // Create dynamic element
+						myMenu.appendChild(newdiv1);			
+						var aTag = document.createElement('a');
+						aTag.setAttribute('class','active-menu');
+						aTag.setAttribute('href',"yourlink.htm");
+						aTag.innerHTML = "Create";
+						newdiv1.appendChild(aTag);
+						
+						
+						var newdiv2 = document.createElement('li'); // Create dynamic element
+						var aTag2 = document.createElement('a');
+						aTag2.setAttribute('class','active-menu');
+						aTag2.setAttribute('href',"yourlink1.htm");
+						aTag2.innerHTML = "Edit";
+						myMenu.appendChild(newdiv2);			
+						newdiv2.appendChild(aTag2);
+									
 						});
+
 						
 						$("#payment").hover(function(){
-						    markers[2].setMap(handler.getMap()); //because clusterer removes map property from marker
-						    markers[2].panTo();
-						    google.maps.event.trigger(markers[2].getServiceObject(), 'click');
+							var myMenu=document.getElementById('main-menu')
+						$( myMenu).empty();
+						var newdiv1 = document.createElement('li'); // Create dynamic element
+						myMenu.appendChild(newdiv1);			
+						var aTag = document.createElement('a');
+						aTag.setAttribute('class','active-menu');
+						aTag.setAttribute('href',"yourlink.htm");
+						aTag.innerHTML = "Account Info";
+						newdiv1.appendChild(aTag);
+						
+						
+						var newdiv2 = document.createElement('li'); // Create dynamic element
+						var aTag2 = document.createElement('a');
+						aTag2.setAttribute('class','active-menu');
+						aTag2.setAttribute('href',"yourlink1.htm");
+						aTag2.innerHTML = "Payment Mode";
+						myMenu.appendChild(newdiv2);			
+						newdiv2.appendChild(aTag2);
+						
+						var newdiv3 = document.createElement('li'); // Create dynamic element
+						var aTag3 = document.createElement('a');
+						aTag3.setAttribute('class','active-menu');
+						aTag3.setAttribute('href',"yourlink2.htm");
+						aTag3.innerHTML = "TBD";
+						myMenu.appendChild(newdiv3);			
+						newdiv3.appendChild(aTag3);		
+
+						
+						var newdiv4 = document.createElement('li'); // Create dynamic element
+						var aTag4 = document.createElement('a');
+						aTag4.setAttribute('class','active-menu');
+						aTag4.setAttribute('href',"yourlink3.htm");
+						aTag4.innerHTML = "FAQ";
+						myMenu.appendChild(newdiv4);			
+						newdiv4.appendChild(aTag4);		
 						});
 						
 						$("#settings").hover(function(){
-						    markers[2].setMap(handler.getMap()); //because clusterer removes map property from marker
-						    markers[2].panTo();
-						    google.maps.event.trigger(markers[2].getServiceObject(), 'click');
+												var myMenu=document.getElementById('main-menu')
+						$( myMenu).empty();
+						var newdiv1 = document.createElement('li'); // Create dynamic element
+						myMenu.appendChild(newdiv1);			
+						var aTag = document.createElement('a');
+						aTag.setAttribute('class','active-menu');
+						aTag.setAttribute('href',"yourlink.htm");
+						aTag.innerHTML = "TBD";
+						newdiv1.appendChild(aTag);
 						});
 						
 						
