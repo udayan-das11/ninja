@@ -1,4 +1,4 @@
-<%= form_for(@menu) do |f| %>
+<%= form_for @menu , :url => {:controller => 'menus',:action =>"create"} do |f| %>
   <% if @menu.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
@@ -22,7 +22,7 @@
     <div class="actions">
       <%= f.submit 'Create Menu', :class => 'btn btn-primary'%>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Profile Photo</button>
+    <button type="button" class="6btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Profile Photo</button>
     <button type="button" class="btn btn-primary" data-toggle="modal"  id="previewPhoto" >Preview Photo</button>
     <div class="btn btn-info" onClick="addNewItem('itemsList');">Add an Item</div>
     <div id='itemsList'>
@@ -38,7 +38,7 @@
         <h4 class="modal-title" id="myModalLabel">Upload New</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag '/hosts/create_photo', method: :post, class: "dropzone form", id: "media-dropzone" do %>
+        <%= form_tag '/menus/create_photo', method: :post, class: "dropzone form", id: "media-dropzone" do %>
             <div class="fallback">
               <%= file_field_tag "media", multiple: true%>
             </div>
@@ -72,32 +72,25 @@
 
 <script>
     var inival=0;
+
+
     function addNewItem(elementCityID) {
         inival=inival+1; // Increment element number by 1
         var ni = document.getElementById(elementCityID);
-        var newdiv1 = document.createElement('div'); // Create dynamic element
-        newdiv1.setAttribute('class','form-group');
-        ni.appendChild(newdiv1);
-        var newlab = document.createElement('label');
-        newlab.setAttribute('class','col-xs-3 control-label');
-        var newdiv = document.createElement('div'); // Create dynamic element
-        var divIdName = 'Location'+inival;
-        newdiv.setAttribute('class','col-xs-5');
-        newdiv1.appendChild(newlab);
-        newdiv1.appendChild(newdiv);
+        var divIdName="Items"+inival;
         var newText = document.createElement('input');
         newText.setAttribute('type','text');
         newText.setAttribute('name',divIdName);
         newText.setAttribute('class','form-control');
-        newText.setAttribute('placeholder','Locality Name');
-        newdiv.appendChild(newText);
+        newText.setAttribute('placeholder','Item Name');
+        ni.appendChild(newText);
     }
 
 
     $("#previewPhoto").click( function() {
 // send an AJAX request to fetch the data
         $.ajax({
-            url:  "<%= '/hosts/previewAlbum' %>", // Route to the Script Controller method
+            url:  "<%= '/menus/previewAlbum' %>", // Route to the Script Controller method
             type: "GET",
             dataType: "json",
             complete: function() {},

@@ -5,6 +5,7 @@ class MenusController < ApplicationController
   # GET /menus.json
   def index
     @menus = Menu.all
+    @menu = Menu.new
   end
 
   # GET /menus/1
@@ -21,14 +22,52 @@ class MenusController < ApplicationController
   def edit
   end
 
+  def previewAlbum
+   @menu_attachments = MenuAttachment.find_by_sql('select * from menu_attachments ')
+
+    respond_to do |format|
+      format.html
+      format.js {}
+      format.json {
+        render json: {:attachments => @menu_attachments}
+      }
+    end
+  end
+
+  def create_photo
+     @menu_attachment =  MenuAttachment.new(avatar: params[:file] , menu_id:'0')
+    respond_to do |format|
+      if @menu_attachment.save
+        format.html { redirect_to @menu, notice: 'Menu attachment was successfully created.' }
+        format.json { render :index, status: :created, location: @menu }
+      else
+        format.html { render :new }
+        format.json { render json: @menu_attachment.errors, status: :unprocessable_entity }
+      end
+    end
+    head :ok
+  end
+
   # POST /menus
   # POST /menus.json
   def create
+    items=params.size-6;
     @menu = Menu.new(menu_params)
-
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        puts(@menu.id)
+        MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
+        for i in 1..items
+          itemFeild="Items"+i.to_s;
+          @item=Item.new(name:params[itemFeild],Menu_id:@menu.id)
+
+          if (@item.name && !@item.name.blank?)
+            @item.save;
+          end
+
+        end
+
+        format.html { redirect_to :back, notice: 'Menu was successfully created.' }
         format.json { render :show, status: :created, location: @menu }
       else
         format.html { render :new }
