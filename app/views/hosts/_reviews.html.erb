@@ -1,0 +1,31 @@
+﻿<div class="chat-panel panel panel-default chat-boder chat-panel-head" >
+						
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i>
+                            Reviews
+                        </div>
+						
+                        <div class="panel-body">
+                            <ul class="chat-box">
+							<% @reviews.each do |review| %>
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body">                                        
+                                            <strong >Jack Sparrow</strong>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago
+                                            </small>                                      
+                                        <p>
+                                            <%= review.text %>
+                                        </p>
+                                    </div>
+                                </li>
+								<%end%>
+                            </ul>
+                        </div>
+						
+
+                    </div>
+</div>

@@ -1,27 +1,26 @@
 Rails.application.routes.draw do
+  resources :menu_attachments
+  resources :post_attachments
   resources :items
   resources :menus
   resources :order_tables
   resources :image_gallaries
   resources :users
-  resources :payments
   get 'hosts/index'
   get 'hosts/mainpage'
   get 'ninja/show'
   get 'hosts/create'
+  get 'hosts/reviews'
   post 'hosts/create'
   get 'auth/:provider/callback', to: 'hosts#loginFB'
   get 'logout', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  get 'payments/index'
   get 'ninja/index'
-  post '/hook' => 'payments#hook'
   # You can have the root of your site routed with "root"
-  root 'payments#create'
-  post 'payments/create'
-
-
+  root 'hosts#index'
+  post 'hosts/create_photo'
+  get 'hosts/previewAlbum'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
