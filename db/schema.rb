@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821191454) do
+ActiveRecord::Schema.define(version: 20150823022116) do
+
+  create_table "card_transactions", force: :cascade do |t|
+    t.integer  "card_id"
+    t.string   "action"
+    t.integer  "amount"
+    t.boolean  "success"
+    t.string   "authorization"
+    t.string   "message"
+    t.text     "params"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "card_transactions", ["card_id"], name: "index_card_transactions_on_card_id"
+
+  create_table "cards", force: :cascade do |t|
+    t.string   "ip_address"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "card_type"
+    t.date     "card_expires_on"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "payment_id"
+  end
 
 # Could not dump table "hosts" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
@@ -62,6 +87,22 @@ ActiveRecord::Schema.define(version: 20150821191454) do
 
   add_index "order_tables", ["Host_id"], name: "index_order_tables_on_Host_id"
   add_index "order_tables", ["User_id"], name: "index_order_tables_on_User_id"
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_table_id"
+    t.string   "full_name"
+    t.string   "company"
+    t.string   "email"
+    t.string   "telephone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "notification_params"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
+  end
+
+  add_index "payments", ["order_table_id"], name: "index_payments_on_order_table_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

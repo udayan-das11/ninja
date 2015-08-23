@@ -38,4 +38,16 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test  # :production when you will use a real Pro Account
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+        login: "food4thought2020_api1.gmail.com",
+        password: "2PG6QRCTDUZ8WT2F",
+        signature: "AMRQQAaQPWHZ7o9OO8lRm3JfYsXSAjTgduQ3CKqnrAbdpeIAd2HY.mv-"
+    )
+  end
+
+
+
 end

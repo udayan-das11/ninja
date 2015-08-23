@@ -1,0 +1,80 @@
+﻿﻿<div class="container">
+  <div class='row'>
+    <div class='col-md-4'></div>
+    <div class='col-md-4'>
+      <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
+        <%= form_for @payment,url:{:controller=>'payments', :action=>'create'}, html: { class: "basic-grey" } do |f| %>
+        <div class='form-row'>
+          <div class='col-xs-12 form-group required'>
+            <%= f.label :full_name %>
+            <%= f.text_field :full_name %>
+          </div>
+          <div class='col-xs-12 form-group required'>
+            <%= f.label :company %>
+            <%= f.text_field :company %>
+          </div>
+          <div class='col-xs-12 form-group required'>
+            <%= f.label :email %>
+            <%= f.text_field :email %>
+          </div>
+        </div>
+        <div class='form-row'>
+          <%= f.fields_for :card do |c| %>
+              <div class='col-xs-12 form-group required'>
+                <%= c.label :first_name %>
+                <%= c.text_field :first_name %>
+              </div>
+              <div class='col-xs-12 form-group required'>
+                <%= c.label :last_name %>
+                <%= c.text_field :last_name %>
+              </div>
+          <div class='col-xs-12 form-group card required'>
+            <%= c.label :card_type %>
+            <%= c.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+          </div>
+          <div class='col-xs-12 form-group card required'>
+            <%= c.label :card_number %>
+            <%= c.text_field :card_number %>
+          </div>
+        </div>
+        <div class='form-row'>
+          <div class='col-xs-4 form-group cvc required'>
+            <%= c.label :card_verification, "Card Verification Value (CVV)" %>
+            <%= c.text_field :card_verification %>
+          </div>
+          <div class='col-xs-4 form-group expiration required'>
+            <%= c.label :card_expires_on %>
+            <%= c.date_select :card_expires_on %>
+          </div>
+          <div class='col-xs-4 form-group expiration required'>
+            <label class='control-label'>Year</label>
+            <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+          </div>
+        </div>
+        <div class='form-row'>
+          <div class='col-md-12'>
+            <div class='form-control total btn btn-info'>
+              Total:
+              <span class='amount'>$300</span>
+            </div>
+          </div>
+        </div>
+          <% end %>
+        <div class='form-row'>
+          <div class='col-md-12 form-group'>
+            <%= f.submit "Payment", class: "btn", style: "color: white;background: rgb(242, 118, 73);" %>
+          </div>
+        </div>
+        <div class='form-row'>
+          <div class='col-md-12 error form-group hide'>
+            <div class='alert-danger alert'>
+              Please correct the errors and try again.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class='col-md-4'></div>
+  </div>
+</div>
+          <% end %>

@@ -45,3 +45,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'omniauth-facebook'
+gem 'activemerchant'
+
+gem 'coffee-script-source', '1.8.0'
