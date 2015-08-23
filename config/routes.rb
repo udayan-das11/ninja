@@ -21,6 +21,13 @@ Rails.application.routes.draw do
   root 'hosts#index'
   post 'hosts/create_photo'
   get 'hosts/previewAlbum'
+
+  #menus
+  get 'menus/index'
+  post 'menus/create'
+  get 'menus/new'
+  post 'menus/create_photo'
+  get 'menus/previewAlbum'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
