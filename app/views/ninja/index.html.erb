@@ -35,17 +35,8 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
 
-  <script type="text/javascript" src="/assets/jquery.js">
-  </script>
-
-  <script type="text/javascript" src="/assets/modernizr.custom.js">
-  </script>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script type="text/javascript" src="/assets/bootstrap.js"></script>
-  <script type="text/javascript" src="js/SmoothScroll.js"></script>
-  <script type="text/javascript" src="js/jquery.isotope.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -53,102 +44,21 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-  <style>
-      .ui-widget {
-          border: 1px solid black;
 
-      }
-
-      .ui-tooltip, .arrow:after {
-          background: white;
-          border: 1px solid white;
-      }
-      .ui-tooltip {
-          padding: 10px 20px;
-          color: black;
-          border-radius: 2px;
-          font: bold 14px "Helvetica Neue", Sans-Serif;
-          text-transform: uppercase;
-          box-shadow: 0 0 1px black;
-          border: 1px solid white !important;
-      }
-      .arrow {
-          width: 70px;
-          height: 16px;
-          overflow: hidden;
-          position: absolute;
-          left: 50%;
-          margin-left: -35px;
-          bottom: -17px;
-      }
-      .arrow.top {
-          top: -17px;
-          bottom: auto;
-      }
-      .arrow.left {
-          left: 20%;
-      }
-      .arrow:after {
-          content: "";
-          position: absolute;
-          left: 20px;
-          top: -20px;
-          width: 25px;
-          height: 25px;
-          box-shadow: 0 0 1px black;
-          -webkit-transform: rotate(45deg);
-          -moz-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-          -o-transform: rotate(45deg);
-          transform: rotate(45deg);
-      }
-      .arrow.top:after {
-          bottom: -20px;
-          top: auto;
-      }
-      .hidden {
-          visibility: hidden;
-      }
-
-      .fireTip {
-          margin-left: -150px;
-      }
+  <!--Include the slidepanel plugin -->
+  <!--Add the css -->
+  <link rel="stylesheet" type="text/css" href="/assets/jquery.slidepanel.css">
 
 
 
-
-  </style>
   <script>
 
       $( document ).ready(function() {
-          $( document ).tooltip({
-              items: "input",
-              content: "<ul><li>For Guests</li><li>For Hosts</li></ul>"
-              ,
-              position: {
-                  my: "center bottom-20",
-                  at: "center top",
-                  using: function( position, feedback ) {
-                      $( this ).css( position );
-                      $( "<div>" )
-                              .addClass( "arrow" )
-                              .addClass( feedback.vertical )
-                              .addClass( feedback.horizontal )
-                              .appendTo( this );
-                  }
-              }
+          $('[data-slidepanel]').slidepanel({
+              orientation: 'right',
+              mode: 'overlay',
+              static: true
           });
-
-          $('#hitw').click(function () {
-              if(!$(this).hasClass('open')) {
-                  $('#age').trigger('mouseover');
-                  $(this).addClass('open');
-              } else {
-                  $('#age').trigger('mouseout');
-                  $(this).removeClass('open');
-              }
-
-          })
       });
   </script>
 
@@ -173,14 +83,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">How it Works<b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" class="page-scroll">How it Works<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#">For Guest</a></li>
             <li><a href="#">For Host</a></li>
           </ul>
         </li>
         <li><a href="#tf-about" class="page-scroll">Want to Host?</a></li>
-        <li><a class="navicon-button">
+        <li><a  href="Test.html" class="navicon-button" data-slidepanel="panel">
           <div class="navicon"></div>
           <div class="noti_bubble">2</div>
         </a></li>
@@ -456,7 +366,7 @@
     <div class="overlay">
       <div class="container">
         <div class="section-title center">
-          <h2><strong>Our clients?</strong> testimonials</h2>
+          <h2><strong>Our clients</strong> testimonials </h2>
           <div class="line">
             <hr>
           </div>
@@ -467,126 +377,84 @@
               <div class="item">
                 <h5>This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h5>
                 <p><strong>Dean Martin</strong>, CEO Acme Inc.</p>
-                <div class="col-sm-2 col-xs-4">
-                  <div id="tile3" class="tile">
+              </div>
 
-                    <div class="carousel slide" data-ride="carousel">
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner">
-                        <div class="item active text-center">
-                          <div>
-                            <span class="fa fa-star bigicon"></span>
-                          </div>
-                          <div class="icontext">
-                            Rating
-                          </div>
-                          <div class="icontext">
-                            8.5
-                          </div>
-                        </div>
-                        <div class="item text-center">
-                          <div>
-                            <span class="fa fa-star bigicon"></span>
-                          </div>
-                          <div class="icontext">
-                            Rating
-                          </div>
-                          <div class="icontext">
-                            7.9
-                          </div>
-                        </div>
-                        <div class="item text-center">
-                          <div>
-                            <span class="fa fa-star bigicon"></span>
-                          </div>
-                          <div class="icontext">
-                            Rating
-                          </div>
-                          <div class="icontext">
-                            9.9
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div class="item">
+                <h5>This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h5>
+                <p><strong>Dean Martin</strong>, CEO Acme Inc.</p>
+              </div>
 
-                  <div class="item">
-                    <h5>This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h5>
-                    <p><strong>Dean Martin</strong>, CEO Acme Inc.</p>
-                  </div>
-
-                  <div class="item">
-                    <h5>This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h5>
-                    <p><strong>Dean Martin</strong>, CEO Acme Inc.</p>
-                  </div>
-                </div>
+              <div class="item">
+                <h5>This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h5>
+                <p><strong>Dean Martin</strong>, CEO Acme Inc.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-</div></div>
+    </div>
+  </div>
       <!-- Contact Section
       ==========================================-->
-      <div id="tf-contact" class="text-center">
-        <div class="container">
+  <div id="tf-contact" class="text-center">
+    <div class="container">
 
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
 
-              <div class="section-title center">
-                <h2>Feel free to <strong>contact us</strong></h2>
-                <div class="line">
-                  <hr>
-                </div>
-                <div class="clearfix"></div>
-                <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
-              </div>
-
-              <form>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Message</label>
-                  <textarea class="form-control" rows="3"></textarea>
-                </div>
-
-                <button type="submit" class="btn tf-btn btn-default">Submit</button>
-              </form>
-
+          <div class="section-title center">
+            <h2>Feel free to <strong>contact us</strong></h2>
+            <div class="line">
+              <hr>
             </div>
+            <div class="clearfix"></div>
+            <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
           </div>
+
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Message</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn tf-btn btn-default">Submit</button>
+          </form>
 
         </div>
       </div>
 
-      <nav id="footer">
-        <div class="container">
-          <div class="pull-left fnav">
-            <p>ALL RIGHTS RESERVED. COPYRIGHT ? 2014. Designed by <a href="https://dribbble.com/shots/1817781--FREEBIE-Spirit8-Digital-agency-one-page-template">Robert Berki</a> and Coded by <a href="https://dribbble.com/jennpereira">Jenn Pereira</a></p>
-          </div>
-          <div class="pull-right fnav">
-            <ul class="footer-social">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    </div>
+  </div>
+
+  <nav id="footer">
+    <div class="container">
+      <div class="pull-left fnav">
+        <p>ALL RIGHTS RESERVED. COPYRIGHT ?2014. Designed by <a href="https://dribbble.com/shots/1817781--FREEBIE-Spirit8-Digital-agency-one-page-template">Robert Berki</a> and Coded by <a href="https://dribbble.com/jennpereira">Jenn Pereira</a></p>
+      </div>
+      <div class="pull-right fnav">
+        <ul class="footer-social">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 
 
@@ -725,5 +593,4 @@
       </div>
     </div>
 </body>
-<script type="text/javascript" src="js/main.js"></script>
 </html>

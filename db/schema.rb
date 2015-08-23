@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 20150823022116) do
 
   add_index "items", ["Menu_id"], name: "index_items_on_Menu_id"
 
+  create_table "menu_attachments", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string   "menuType"
     t.string   "experience"
@@ -103,6 +110,29 @@ ActiveRecord::Schema.define(version: 20150823022116) do
   end
 
   add_index "payments", ["order_table_id"], name: "index_payments_on_order_table_id"
+
+  create_table "post_attachments", force: :cascade do |t|
+    t.integer  "host_id"
+    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "text"
+    t.string   "ambiance"
+    t.string   "social"
+    t.string   "cooking"
+    t.string   "x"
+    t.string   "overall"
+    t.integer  "user_id"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["host_id"], name: "index_reviews_on_host_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
