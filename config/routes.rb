@@ -10,6 +10,7 @@
   get 'hosts/mainpage'
   get 'ninja/show'
   get 'hosts/create'
+  get 'hosts/reviews'
   post 'hosts/create'
 	get 'auth/:provider/callback', to: 'hosts#loginFB'
 	get 'logout', to: 'sessions#destroy'

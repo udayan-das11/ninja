@@ -132,6 +132,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 			</div>
                  <!-- /. ROW  -->
                 <hr />                
+			<div id="bc">	
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">           
 			<div class="panel panel-back noti-box">
@@ -227,6 +228,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 
            </div>
                  <!-- /. ROW  -->
+				 
                 <div class="row" >
                     <div class="col-md-3 col-sm-12 col-xs-12">
   <div class="panel panel-primary text-center no-boder bg-color-green">
@@ -491,10 +493,21 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 </div>     
                  <!-- /. ROW  -->           
     </div>
+	
+	
+	<div id='userreviews'>
+	
+		</div>
+	
+	
+	
+	
+	
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
+		</div>
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -516,15 +529,16 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 						myMenu.appendChild(newdiv1);			
 						var aTag = document.createElement('a');
 						aTag.setAttribute('class','active-menu');
-						aTag.setAttribute('href',"yourlink.htm");
 						aTag.innerHTML = "Meals Served";
+						aTag.setAttribute("href","hosts/reviews");
 						newdiv1.appendChild(aTag);
 						
 						
 						var newdiv2 = document.createElement('li'); // Create dynamic element
 						var aTag2 = document.createElement('a');
 						aTag2.setAttribute('class','active-menu');
-						aTag2.setAttribute('href',"yourlink1.htm");
+						aTag2.setAttribute('data-remote','true');
+						aTag2.setAttribute("href","reviews");
 						aTag2.innerHTML = "Reviews";
 						myMenu.appendChild(newdiv2);			
 						newdiv2.appendChild(aTag2);
@@ -609,7 +623,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 						});
 						
 						$("#settings").click(function(){
-												var myMenu=document.getElementById('main-menu')
+						var myMenu=document.getElementById('main-menu')
 						$( myMenu).empty();
 						var newdiv1 = document.createElement('li'); // Create dynamic element
 						myMenu.appendChild(newdiv1);			
@@ -620,7 +634,32 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 						newdiv1.appendChild(aTag);
 						});
 						
+						function myFunction(myelement) {
+							$('#bc').hide();
+						   alert(myelement)
+						    $.ajax({
+			                 url: "<%= '/hosts/reviews' %>", // Route to the Script Controller method
+				                type: "GET",
+				            dataType: "json",
+				                data: {},
+				            complete: function() {},
+				             success: function(data) {
+
+				                      },
+				               error: function() {
+				                        alert("Ajax error!")
+				                      }
+							});
+						   $(myelement).show();
+						}
+						
+						$(document).ready(function() {
+							alert('#@$@#$');
+						   $('#bc').hide();
+						});
 						
 						
 						</script>
+						
+						
 </body>    

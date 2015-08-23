@@ -23,6 +23,13 @@ class HostsController < ApplicationController
     @host = Host.new
   end
 
+  def reviews
+    @reviews = Review.all
+	 respond_to do |format|               
+		format.js
+	end     
+  end
+  
   # GET /hosts/1/edit
   def edit
   end
@@ -123,6 +130,11 @@ class HostsController < ApplicationController
       format.html { redirect_to hosts_url, notice: 'Host was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+    def mainpage
+		@reviews=Review.all
+		return
   end
 
   private
