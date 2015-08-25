@@ -350,7 +350,9 @@ text-align: center;
 font-size: 12px;
 line-height: 1.428571429;
 }
-
+.navbar-top-links{
+    float: right;
+}
 /*==============================================
     MEDIA QUERIES     
     =============================================*/

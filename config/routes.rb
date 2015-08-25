@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :users
   get 'hosts/index'
   get 'hosts/mainpage'
+  get 'ninja/index'
   get 'ninja/show'
   get 'hosts/create'
   get 'hosts/reviews'
   post 'hosts/create'
+  get 'hosts/updateReview'
   get 'auth/:provider/callback', to: 'hosts#loginFB'
   get 'logout', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
   root 'hosts#index'
   post 'hosts/create_photo'
   get 'hosts/previewAlbum'
-
+  
   #menus
   get 'menus/index'
   post 'menus/create'

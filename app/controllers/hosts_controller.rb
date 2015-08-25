@@ -24,12 +24,26 @@ class HostsController < ApplicationController
   end
 
   def reviews
-    @reviews = Review.all
+    @reviews=Review.order( "created_at DESC")
 	 respond_to do |format|               
 		format.js
 	end     
   end
-  
+
+  def updateReview
+    Review.where( id: params[:reviewID]).update_all( status: 'seen' )
+    @reviews=Review.order( "created_at DESC")
+    @unread_review_count=Review.where("status='new'").count
+    respond_to do |format|
+      format.html
+      format.js {}
+      format.json {
+        render json: {:count => @unread_review_count}
+      }
+    end
+  end
+
+
   # GET /hosts/1/edit
   def edit
   end
@@ -133,8 +147,8 @@ class HostsController < ApplicationController
   end
   
     def mainpage
-		@reviews=Review.all
-		return
+		@reviews=Review.order( "created_at DESC")
+		@unread_review_count=Review.where("status='new'").count
   end
 
   private

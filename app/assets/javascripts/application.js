@@ -15,10 +15,4 @@
 //= require turbolinks
 //= require underscore
 //= require gmaps/google
-//= require dropzone
-//= require bootstrap
-//= require jquery.smartWizard-2.0.min
-//= require SmoothScroll
-//= require jquery.isotope
-//= require modernizr.custom
-//= require jquery.sidepanel
+//= require_tree .
