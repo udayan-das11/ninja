@@ -20,7 +20,10 @@
             </small>
             <br/>
             <div>
-              Menu <%= orderForGuest.menu_id %>
+              Menu Name : <%= Menu.find(orderForGuest.menu_id).menuName %>
+            </div>
+            <div>
+              Menu Title :  <%= Menu.find(orderForGuest.menu_id).menuTitle %>
             </div>
             <div>
               Date <%= orderForGuest.date %>
@@ -32,7 +35,8 @@
               Number of Guests  <%= orderForGuest.number_of_guests %>
             </div>
             <br/>
-            <div class="dropdown">
+            <div>
+              <span class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="label label-success">view customizations</span>
               </a>
@@ -57,6 +61,31 @@
                   </a>
                 </li>
               </ul>
+              </span>
+
+              <span class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="label label-success" onclick="checkAvailability(<%= orderForGuest.id %>,<%= orderForGuest.menu_id %>,<%= orderForGuest.date %>,<%= orderForGuest.number_of_guests %>)">check availability</span>
+              </a>
+              <ul class="dropdown-menu dropdown-messages">
+                <li>
+                  <a href="#">
+                    <div>
+                      <strong>Available</strong>
+											  <span class="pull-right text-muted">
+                                            <em id="availability<%= orderForGuest.id %>"></em>
+                                            </span>
+                    </div>
+                    <div>
+                      <strong>Reason</strong>
+											  <span class="pull-right text-muted">
+                                            <em id="reason<%= orderForGuest.id %>">ipsum loretum gandu madarchodum</em>
+                                            </span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              </span>
 
               <div class="pull-right" id="acceptRejectButtons<%=orderForGuest.id%>">
                 <% if (orderForGuest.status=="new") %>
@@ -129,6 +158,35 @@
             }
         });
     }
+
+    function checkAvailability(myID,menuID,orderDate,guestCount) {
+        $.ajax({
+            url: "<%= '/order_tables/checkAvailability' %>", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            data: { orderID: myID,menuID:menuID,orderDate:orderDate,guestCount:guestCount },
+            complete: function() {},
+            success: function(data) {
+                if (data.isavailable=='yes') {
+                    var orderForGuestcount = document.getElementById('availability' + myID);
+                    orderForGuestcount.innerHTML = 'YES';
+                    var myOrderDeleted = document.getElementById('reason' + myID);
+                    myOrderDeleted.innerHTML = 'Not Applicable';
+                } else {
+                    var orderForGuestcount = document.getElementById('availability' + myID);
+                    orderForGuestcount.innerHTML = 'NO';
+                    var myOrderDeleted = document.getElementById('reason' + myID);
+                    myOrderDeleted.innerHTML = data.reason;
+                }
+            },
+            error: function() {
+                alert("Ajax error!")
+            }
+        });
+    }
+
+
+
     function unwrapChildren(element) {
         var parent, node, nextNode;
 

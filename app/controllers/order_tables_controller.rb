@@ -69,7 +69,7 @@ class OrderTablesController < ApplicationController
   end
 
   def updateOrderForGuestAccept
-    OrderTable.where( id: params[:orderID]).update_all( status: 'seen' )
+    OrderTable.where( id: params[:orderID]).update_all( status: 'accepted' )
     @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
     session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
         respond_to do |format|
@@ -82,7 +82,7 @@ class OrderTablesController < ApplicationController
   end
 
   def updateOrderForGuestReject
-    OrderTable.delete(params[:orderID])
+    OrderTable.where("id = ? AND Host_id = ?", params[:orderID], 1).update_all(status: 'rejected')
     @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
     session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
         respond_to do |format|
@@ -93,6 +93,39 @@ class OrderTablesController < ApplicationController
           }
         end
   end
+
+  def checkAvailability
+    myOrders=OrderTable.where("Host_id = ? AND menu_id = ? AND date = ?", 1,params[:menuID],params[:orderDate])
+    if (!myOrders)
+        respond_to do |format|
+          format.html
+          format.js {}
+          format.json {
+            render json: {:isavailable => 'yes'}
+          }
+        end
+    else
+      myGuestsCount=0
+      isAvailable='yes'
+      reason='none'
+      myOrders.each do |orderForGuest|
+        myGuestsCount=myGuestsCount+orderForGuest.number_of_guests
+      end
+      myMenu=Menu.find(params[:menuID].to_i)
+      if (myMenu.numberGuests.to_i<myGuestsCount)
+        isAvailable='no'
+        reason='guests exceeded'
+      end
+      respond_to do |format|
+        format.html
+        format.js {}
+        format.json {
+          render json: {:isavailable => isAvailable, :reason => reason}
+        }
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
