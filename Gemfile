@@ -48,5 +48,5 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'omniauth-facebook'
 gem 'activemerchant'
-
+gem 'premailer-rails'
 gem 'coffee-script-source', '1.8.0'

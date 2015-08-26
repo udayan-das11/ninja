@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link href="/assets/bootstrap.css" rel="stylesheet" type="text/css">
+
+  <title>RailsCasts Weekly</title>
+  <style type="text/css">
+      body, td { color:#000000; font-size:14px; font-family:Verdana,Helvetica,Arial; }
+      .divider { background-color:#555555; height:2px; }
+      .episode h2 { margin-top:0; margin-bottom:8px; font-size:18px; }
+      .episode p { margin:8px 0; }
+      .episode img { border:solid 1px #777777; }
+      .episode .duration { font-size:11px;color:#555555; }
+      #footer { font-size:11px; color:#555555; }
+      #footer a { color:#555555;}
+  </style>
+</head>
+<body>
+<table width="100%" id="background" border="0" cellpadding="0" cellspacing="0">
+  <tr><td align="center" valign="top">
+    <table width="650" id="main" border="0" cellpadding="0" cellspacing="20">
+      <tr>
+        <td id="header" colspan="2">
+          <a href="http://localhost:3000/ninja/index"><img src="http://railscasts.com/images/railscasts_logo.png" width="423" height="56" alt="RailsCasts"></a>
+        </td>
+      </tr>
+      <tr>
+        <td class="divider" colspan="2" bgcolor="#555555" height="2"></td>
+      </tr>
+      <tr class="episode">
+        <td>
+          <div class="panel panel-primary text-center no-boder bg-color-green">
+            <div align="center"><img src="http://www.prepbootstrap.com/Content/images/template/metrotiles/1.png" class="img-circle img-responsive img-thumbnail" height="70px" width="70px" >	</div>
+            <div class="panel-body">
+              <i class="fa fa-star" style="color:#F60"></i>
+              <i class="fa fa-star" style="color:#F60"></i>
+              <i class="fa fa-star" style="color:#F60"></i>
+              <i class="fa fa-star-half" style="color:#F60"></i>
+              <h4><%= Menu.find(@menu_id).menuName %></h4>
+              <h5><%= Menu.find(@menu_id).menuTitle %></h5>
+            </div>
+            <div class="carousel slide" data-ride="carousel">
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active" id="img1" >
+                  <img src="http://www.prepbootstrap.com/Content/images/template/metrotiles/1.png" class="img-responsive" />
+                </div>
+                <div class="item">
+                  <img src="http://www.prepbootstrap.com/Content/images/template/metrotiles/2.jpg" class="img-responsive" />
+                </div>
+                <div class="item">
+                  <img src="http://www.prepbootstrap.com/Content/images/template/metrotiles/3.png" class="img-responsive" />
+                </div>
+
+              </div>
+              <div class="main-text" style="height:20%;">
+                <div class="col-sm-12 col-xs-12">
+                  <div class="row">
+                    <div class="col-md-6 pull-left">
+                      Price
+                    </div>
+                    <div class="col-md-6 pull-right">
+                      Something
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td valign="top">
+          <h1>Hello <%= @username %></h1>
+          <p>The Host has accepted your order for the menu. Please find the order details below</p>
+          <p>
+            <h3>Order Details</h3>
+          </p>
+            <h2>Menu Name : <%= Menu.find(@menu_id).menuName %></h2>
+          </p>
+            <h2>Menu Title :  <%= Menu.find(@menu_id).menuTitle %></h2>
+          </p>
+            <h2>Date : <%= @date %></h2>
+          </p>
+            <h2>Number of guests : <%= @numberOfGuests %></h2>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="divider" colspan="2" bgcolor="#555555" height="2"></td>
+      </tr>
+      <tr>
+        <td id="footer" colspan="2" align="center">
+          <p><a href="#">Unsubscribe</a> if you do not wish to receive these emails in the future.</p>
+          <p>&copy;2011 RailsCasts</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
