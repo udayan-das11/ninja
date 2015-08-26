@@ -518,10 +518,33 @@
          <!-- /. PAGE WRAPPER  -->
         </div>
 		</div>
+
+    <!-- Modal for menu Photo -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Upload New</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_tag '/hosts/create_photo_menus', method: :post, remote:true,class: "dropzone", id: "media-dropzone" do %>
+                <div class="fallback">
+                  <%= file_field_tag "media", multiple: true%>
+                </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
      <!-- /. WRAPPER  -->
 
       <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
+    <!--<script src="assets/js/custom.js"></script>-->
+
 							<script>
 						$("#dashboard").click(function(){
 						var myMenu=document.getElementById('main-menu')
@@ -579,8 +602,9 @@
 						var newdiv1 = document.createElement('li'); // Create dynamic element
 						myMenu.appendChild(newdiv1);			
 						var aTag = document.createElement('a');
-						aTag.setAttribute('class','active-menu');
-						aTag.setAttribute('href',"yourlink.htm");
+                            aTag.setAttribute('class','active-menu');
+                            aTag.setAttribute('data-remote','true');
+                            aTag.setAttribute("href","/hosts/menuAdd");
 						aTag.innerHTML = "Create";
 						newdiv1.appendChild(aTag);
 						
@@ -671,6 +695,68 @@
 						
 						
 						</script>
-						
-						
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Smart Wizard
+            $('#wizard').smartWizard();
+
+            function onFinishCallback(){
+                $('#wizard').smartWizard('showMessage','Finish Clicked');
+            }
+        });
+
+    </script>
+    <script>
+        var inival=0;
+
+
+        function addNewItem(elementCityID) {
+            inival=inival+1; // Increment element number by 1
+            var ni = document.getElementById(elementCityID);
+            var divIdName="Items"+inival;
+            var newText = document.createElement('input');
+            newText.setAttribute('type','text');
+            newText.setAttribute('name',divIdName);
+            newText.setAttribute('class','form-control');
+            newText.setAttribute('placeholder','Item Name');
+            ni.appendChild(newText);
+        }
+
+
+        $("#previewPhoto").click( function() {
+// send an AJAX request to fetch the data
+            $.ajax({
+                url:  "<%= '/menus/previewAlbum' %>", // Route to the Script Controller method
+                type: "GET",
+                dataType: "json",
+                complete: function() {},
+
+                success: function(data) {
+                    $('#media-contents').empty();
+                    $.each(data.attachments, function(i, attachment) {
+                        $('#media-contents').append('<div class="row">');
+                        $('#media-contents').append('<div class="thumbnail">');
+                        $('#media-contents').append('<img src='+ attachment.avatar.url + ' height="100" width="100">');
+                        $('#media-contents').append('</div>');
+                        $('#media-contents').append('</div>');
+
+                    });
+                    jQuery("#previewModal").modal({
+                        show: true
+
+                    });
+
+                },
+                error: function() {
+                    alert("Ajax error!")
+                }
+            });
+
+            return false;
+        });
+
+    </script>
+
+
 </body>    

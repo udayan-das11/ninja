@@ -25,7 +25,12 @@ Rails.application.routes.draw do
   root 'hosts#index'
   post 'hosts/create_photo'
   get 'hosts/previewAlbum'
-  
+
+  #menus
+  post 'hosts/create_photo_menus'
+  get 'hosts/menuAdd'
+
+  post 'hosts/createMenu'
   #menus
   get 'menus/index'
   post 'menus/create'

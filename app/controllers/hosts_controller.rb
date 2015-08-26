@@ -1,4 +1,5 @@
 class HostsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   before_action :set_host, only: [:show, :edit, :update, :destroy]
 
   # GET /hosts
@@ -81,6 +82,7 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
+      if(1==2)
 	    if (!params[:host][:uuid]&&!Host.exists?(emailid: params[:host][:emailid]))
 		    mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
 			myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
@@ -107,7 +109,34 @@ class HostsController < ApplicationController
 		      else
 					flash[:error] = "Error in saving host"
 		      end
-		end
+      end
+      else
+        puts ("#############################################")
+        items=params.size-6;
+        @menu = Menu.new(menu_params)
+        respond_to do |format|
+          if @menu.save
+            puts(@menu.id)
+            MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
+            for i in 1..items
+              itemFeild="Items"+i.to_s;
+              @item=Item.new(name:params[itemFeild],Menu_id:@menu.id)
+
+              if (@item.name && !@item.name.blank?)
+                @item.save;
+              end
+
+            end
+
+            format.html { redirect_to :back, notice: 'Menu was successfully created.' }
+            format.json { render :show, status: :created, location: @menu }
+          else
+            format.html { render :new }
+            format.json { render json: @menu.errors, status: :unprocessable_entity }
+          end
+        end
+      end
+
   end
 
   # PATCH/PUT /hosts/1
@@ -152,6 +181,55 @@ class HostsController < ApplicationController
     session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
   end
 
+  #menus related Code
+  #menus
+  def create_photo_menus
+    @menu_attachment =  MenuAttachment.new(avatar: params[:file] , menu_id:'0')
+    @menu_attachment.save
+    respond_to do |format|
+      format.json{ render :json => @media }
+    end
+
+    def menuAdd
+      # @menus = Menu.all
+      @menu = Menu.new
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def createMenu
+      puts ("#############################################")
+      items=params.size-6;
+      @menu = Menu.new(menu_params)
+      respond_to do |format|
+        if @menu.save
+          puts(@menu.id)
+          MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
+          for i in 1..items
+            itemFeild="Items"+i.to_s;
+            @item=Item.new(name:params[itemFeild],Menu_id:@menu.id)
+
+            if (@item.name && !@item.name.blank?)
+              @item.save;
+            end
+
+          end
+
+          format.html { redirect_to :back, notice: 'Menu was successfully created.' }
+          format.json { render :show, status: :created, location: @menu }
+        else
+          format.html { render :new }
+          format.json { render json: @menu.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+
+  def menu_params
+    params.require(:menu).permit(:menuType,:experience)
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
@@ -162,4 +240,6 @@ class HostsController < ApplicationController
     def host_params
       params.require(:host).permit(:name, :addr, :lat, :longi, :age, :phoneno, :qualification, :profession, :languages, :blog, :idcard, :cardtype, :food, :destination, :toddlrReason, :reasonToenjycooking, :frequencyofCooking)
     end
+
+
 end
