@@ -61,6 +61,39 @@ class OrderTablesController < ApplicationController
     end
   end
 
+  def loadOrdersForGuests
+    @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def updateOrderForGuestAccept
+    OrderTable.where( id: params[:orderID]).update_all( status: 'seen' )
+    @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
+    session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
+        respond_to do |format|
+          format.html
+          format.js {}
+          format.json {
+            render json: {:count => session[:pendingOrdersCount]}
+          }
+        end
+  end
+
+  def updateOrderForGuestReject
+    OrderTable.delete(params[:orderID])
+    @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
+    session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
+        respond_to do |format|
+          format.html
+          format.js {}
+          format.json {
+            render json: {:count => session[:pendingOrdersCount]}
+          }
+        end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order_table

@@ -1,4 +1,4 @@
-﻿<body>
+?<body>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -10,10 +10,10 @@
                 </button>
                 <a class="navbar-brand" href="index.html">Binary admin</a> 
             </div>
-                <ul class="nav navbar-top-links navbar-right">
+                <div class="nav navbar-top-links navbar-right">
 
                     <!-- MESSAGES SECTION -->
-                    <li class="dropdown">
+                    <div class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="label label-success" id="unreadReviewCount"><%= @unread_review_count %></span>    <i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
                     </a>
@@ -73,13 +73,13 @@
                             </li>
                         </ul>
 
-                    </li>
+                    </div>
                     <!--END MESSAGES SECTION -->
 
                     <!--TASK SECTION -->
-                    <li class="dropdown">
+                    <div class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="label label-danger">5</span>   <i class="icon-tasks"></i>&nbsp; <i class="icon-chevron-down"></i>
+                            <span class="label label-danger" id="unreadOrderCount"><%= session[:pendingOrdersCount] %></span>   <i class="icon-tasks"></i>&nbsp; <i class="icon-chevron-down"></i>
                         </a>
 
                         <ul class="dropdown-menu dropdown-tasks">
@@ -155,7 +155,7 @@
                             </li>
                         </ul>
 
-                    </li>
+                    </div>
                     <!--END TASK SECTION -->
 
                     <!--ALERTS SECTION -->
@@ -241,7 +241,7 @@
 
                     </li>
                     <!--END ADMIN SETTINGS -->
-                </ul>
+                </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
@@ -761,6 +761,17 @@
 						aTag2.innerHTML = "Reviews";
 						myMenu.appendChild(newdiv2);			
 						newdiv2.appendChild(aTag2);
+
+
+                            var newdiv5 = document.createElement('li'); // Create dynamic element
+                            var aTag5 = document.createElement('a');
+                            aTag5.setAttribute('class','active-menu');
+                            aTag5.setAttribute('data-remote','true');
+                            aTag5.setAttribute("href","/order_tables/loadOrdersForGuests");
+                            aTag5.innerHTML = "Orders";
+                            myMenu.appendChild(newdiv5);
+                            newdiv5.appendChild(aTag5);
+
 						
 						var newdiv3 = document.createElement('li'); // Create dynamic element
 						var aTag3 = document.createElement('a');
@@ -873,7 +884,6 @@
 						}
 						
 						$(document).ready(function() {
-							alert('#@$@#$');
 						   $('#bc').hide();
 						});
 						

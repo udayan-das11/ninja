@@ -14,66 +14,67 @@
                                     </span>
                                     <div class="chat-body" onclick="setReviewRead(<%=review.id%>)">
                                        <strong >Jack Sparrow</strong>
-
 										<%	for i in 1..review.overall.to_i %>
 											   <i class="fa fa-star" style="color:#F60"></i>
 										<%	end %>
 										<% if review.overall.ends_with?('.5') %>
 											<i class="fa fa-star-half" style="color:#F60"></i>
 										<% end %>
-                                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <span class="label label-success">details</span>
-                                      </a>
-                                      <ul class="dropdown-menu dropdown-messages">
-                                        <li>
-                                          <a href="#">
-                                            <div>
-                                              <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Today</em>
-                                        </span>
-                                            </div>
-                                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                              <br />
-                                              <span class="label label-primary">Important</span>
-
-                                            </div>
-                                          </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                          <a href="#">
-                                                  <div>
-                                                    <strong>Ambiance </strong>
-                                                <span class="pull-right text-muted">
-                                                    <em>Today</em>
-                                                </span>
-                                                  </div>
-                                          </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                          <a href="#">
-                                              <div>
-                                                <strong>Ambiance </strong>
-                                            <span class="pull-right text-muted">
-                                                <em>Today</em>
-                                            </span>
-                                              </div>
-                                          </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                          <a href="#">
-                                              <div>
-                                                <strong>Ambiance </strong>
-                                            <span class="pull-right text-muted">
-                                                <em>Today</em>
-                                            </span>
-                                              </div>
+                                      <div class="dropdown">
+                                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <span class="label label-success">details</span>
                                               </a>
-                                        </li>
-                                      </ul>
+                                              <ul class="dropdown-menu dropdown-messages">
+                                                <li>
+                                                  <a href="#">
+                                                    <div>
+                                                      <strong>Food</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.cooking.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                                        <% if review.cooking.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                      </span>
+                                                    </div>
+                                                    <div>
+                                                      <strong>Ambiance</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.ambiance.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.ambiance.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                                                    </div>
+                                                    <div>
+                                                      <strong>Social</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.social.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.social.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                                                    </div>
+                                                    <div>
+                                                      <strong>Else</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.x.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.x.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                                                    </div>
+                                                  </a>
+                                                </li>
+                                              </ul>
+                                      </div>
                                             <small class="pull-right text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i><%= review.created_at.to_s %>
                                             </small>                                      

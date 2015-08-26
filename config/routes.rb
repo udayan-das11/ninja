@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :post_attachments
   resources :items
   resources :menus
-  resources :order_tables
   resources :image_gallaries
   resources :users
   get 'hosts/index'
@@ -12,8 +11,11 @@ Rails.application.routes.draw do
   get 'ninja/show'
   get 'hosts/create'
   get 'hosts/reviews'
+  get 'order_tables/loadOrdersForGuests'
   post 'hosts/create'
   get 'hosts/updateReview'
+  get 'order_tables/updateOrderForGuestAccept'
+  get 'order_tables/updateOrderForGuestReject'
   get 'auth/:provider/callback', to: 'hosts#loginFB'
   get 'logout', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.

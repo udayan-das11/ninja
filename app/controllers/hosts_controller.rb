@@ -149,6 +149,7 @@ class HostsController < ApplicationController
     def mainpage
 		@reviews=Review.order( "created_at DESC")
 		@unread_review_count=Review.where("status='new'").count
+    session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
   end
 
   private
