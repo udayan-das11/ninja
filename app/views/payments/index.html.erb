@@ -18,32 +18,33 @@
             <%= f.text_field :email %>
           </div>
         </div>
+          HELLO
         <div class='form-row'>
           <%= f.fields_for :card do |c| %>
               <div class='col-xs-12 form-group required'>
-                <%= c.label :first_name %>
+                First Name
                 <%= c.text_field :first_name %>
               </div>
               <div class='col-xs-12 form-group required'>
-                <%= c.label :last_name %>
+                Last Name
                 <%= c.text_field :last_name %>
               </div>
           <div class='col-xs-12 form-group card required'>
-            <%= c.label :card_type %>
+            CArd Type
             <%= c.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
           </div>
           <div class='col-xs-12 form-group card required'>
-            <%= c.label :card_number %>
+            Card Number
             <%= c.text_field :card_number %>
           </div>
         </div>
         <div class='form-row'>
           <div class='col-xs-4 form-group cvc required'>
-            <%= c.label :card_verification, "Card Verification Value (CVV)" %>
+            Card Verification Value (CVV)
             <%= c.text_field :card_verification %>
           </div>
           <div class='col-xs-4 form-group expiration required'>
-            <%= c.label :card_expires_on %>
+           Expires On
             <%= c.date_select :card_expires_on %>
           </div>
           <div class='col-xs-4 form-group expiration required'>

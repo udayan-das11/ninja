@@ -2,6 +2,8 @@
 class PaymentsController < ApplicationController
 
   def index
+    @payment=Payment.new
+    @payment.card = Card.new
   end
 
   def new
@@ -9,18 +11,21 @@ class PaymentsController < ApplicationController
   
   def create
     @payment = Payment.new(payment_params)
+    puts('##########'+request.remote_ip)
     @payment.card.ip_address = request.remote_ip
     if @payment.save
-          if @payment.card.purchase
-            redirect_to payment_path(@payment), notice: @payment.card.card_transaction.message
+          response = GATEWAY.purchase(300,credit_card(@payment.card),:ip => @payment.card.ip_address)
+          puts(response.to_json)
+          if response.success?
+             redirect_to :action => "mainpage", :controller => "hosts"
           else
-            redirect_to payment_path(@payment), alert: @payment.card.card_transaction.message
+            redirect_to :action => "index", :controller => "ninja"
           end
-      end
-    else
-      render :new
-    end
 
+    else
+      redirect_to :action => "index", :controller => "ninja"
+    end
+  end
   def show
   @payment=Payment.find(1);
   end
@@ -34,6 +39,20 @@ def hook
   end
   render nothing: true
 end
+
+
+  def credit_card(myCard)
+
+    @credit_card ||= ActiveMerchant::Billing::CreditCard.new(
+        :type               => myCard.card_type,
+        :number             => myCard.card_number,
+        :verification_value => myCard.card_verification,
+        :month              => myCard.card_expires_on.to_formatted_s(:db)[5,6],
+        :year               => myCard.card_expires_on.to_formatted_s(:db).first(4),
+        :first_name         => myCard.first_name,
+        :last_name          => myCard.last_name
+    )
+  end
 
   protect_from_forgery :except => :hook
 
