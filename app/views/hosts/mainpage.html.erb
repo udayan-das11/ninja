@@ -482,11 +482,11 @@
                         </div>
                         <div class="panel-body">
                             <span class="label label-default">Default</span>
-<span class="label label-primary">Primary</span>
-<span class="label label-success">Success</span>
-<span class="label label-info">Info</span>
-<span class="label label-warning">Warning</span>
-<span class="label label-danger">Danger</span>
+                                            <span class="label label-primary">Primary</span>
+                                            <span class="label label-success">Success</span>
+                                            <span class="label label-info">Info</span>
+                                            <span class="label label-warning">Warning</span>
+                                            <span class="label label-danger">Danger</span>
                         </div>
                     </div>
                          
@@ -730,21 +730,61 @@
 
 
         function addNewItem(elementCityID) {
+
             inival=inival+1; // Increment element number by 1
             var ni = document.getElementById(elementCityID);
+            var rowClass = document.createElement('div');
+            rowClass.setAttribute('class','row');
+            rowClass.setAttribute('style','padding-top:10px;padding-bottom:10px');
+
+            var colClass = document.createElement('div');
+            colClass.setAttribute('class','col-md-3');
             var divIdName="Items"+inival;
             var newText = document.createElement('input');
             newText.setAttribute('type','text');
             newText.setAttribute('name',divIdName);
-            newText.setAttribute('class','form-control');
+            newText.setAttribute('class','form-control ');
             newText.setAttribute('placeholder','Item Name');
-            ni.appendChild(newText);
+            colClass.appendChild(newText);
+            rowClass.appendChild(colClass);
+
+            var colClass1 = document.createElement('div');
+            colClass1.setAttribute('class','col-md-3');
+            var divIdName1="Desc"+inival;
+            var newText1 = document.createElement('input');
+            newText1.setAttribute('type','text');
+            newText1.setAttribute('name',divIdName1);
+            newText1.setAttribute('class','form-control');
+            newText1.setAttribute('placeholder','Description');
+            colClass1.appendChild(newText1);
+            rowClass.appendChild(colClass1);
+
+            var colClass2 = document.createElement('div');
+            colClass2.setAttribute('class','col-md-3');
+            var divIdName2="Type"+inival;
+            var newText2 = document.createElement('input');
+            newText2.setAttribute('type','text');
+            newText2.setAttribute('name',divIdName2);
+            newText2.setAttribute('class','form-control');
+            newText2.setAttribute('placeholder','Type');
+            colClass2.appendChild(newText2);
+            rowClass.appendChild(colClass2);
+
+            var colClass3 = document.createElement('div');
+            colClass3.setAttribute('class','col-md-3');
+            var divIdName3="Taste"+inival;
+            var newText3 = document.createElement('input');
+            newText3.setAttribute('type','text');
+            newText3.setAttribute('name',divIdName3);
+            newText3.setAttribute('class','form-control');
+            newText3.setAttribute('placeholder','Taste Type');
+            colClass3.appendChild(newText3);
+            rowClass.appendChild(colClass3);
+            var br = document.createElement('br');
+            rowClass.appendChild(br);
+            ni.appendChild(rowClass);
+
+
         }
-
-
-
-
     </script>
-
-
 </body>    

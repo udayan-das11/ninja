@@ -83,58 +83,62 @@ class HostsController < ApplicationController
   # POST /hosts.json
   def create
       if(1==2)
-	    if (!params[:host][:uuid]&&!Host.exists?(emailid: params[:host][:emailid]))
-		    mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
-			myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
-			if (mypass==myconfPass) 
-			    @host = Host.new(username:params[:host][:username], emailid:params[:host][:emailid], passwd:mypass, confpasswrd:myconfPass)
-			    @host.save
-				session[:hostEmailId]=@host.emailid
-			else
-			    flash[:error] = "Passwords do not match"
-			end
-			redirect_to :action => "index", :controller => "hosts"
-		else
-		    if (session[:hostuuid])
-			    puts('444444')
-		        @host = Host.find_by_uuid(session[:hostuuid])
-			else
-				puts('55555')
-                @host = Host.find_by_emailid(session[:hostEmailId])
-			end
-			@host.update(lat:params[:lat],longi:params[:lng])
-			puts('#######')
-		      if @host.update(host_params)
-					redirect_to :action => "mainpage", :controller => "hosts"
-		      else
-					flash[:error] = "Error in saving host"
-		      end
-      end
-      else
-        puts ("#############################################")
-        items=params.size-6;
-        @menu = Menu.new(menu_params)
-        respond_to do |format|
-          if @menu.save
-            puts(@menu.id)
-            MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
-            for i in 1..items
-              itemFeild="Items"+i.to_s;
-              @item=Item.new(name:params[itemFeild],Menu_id:@menu.id)
-
-              if (@item.name && !@item.name.blank?)
-                @item.save;
-              end
-
+            if (!params[:host][:uuid]&&!Host.exists?(emailid: params[:host][:emailid]))
+              mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
+            myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
+            if (mypass==myconfPass)
+                @host = Host.new(username:params[:host][:username], emailid:params[:host][:emailid], passwd:mypass, confpasswrd:myconfPass)
+                @host.save
+              session[:hostEmailId]=@host.emailid
+            else
+                flash[:error] = "Passwords do not match"
             end
-
-            format.html { redirect_to :back, notice: 'Menu was successfully created.' }
-            format.json { render :show, status: :created, location: @menu }
+            redirect_to :action => "index", :controller => "hosts"
           else
-            format.html { render :new }
-            format.json { render json: @menu.errors, status: :unprocessable_entity }
-          end
-        end
+              if (session[:hostuuid])
+                puts('444444')
+                  @host = Host.find_by_uuid(session[:hostuuid])
+            else
+              puts('55555')
+                      @host = Host.find_by_emailid(session[:hostEmailId])
+            end
+            @host.update(lat:params[:lat],longi:params[:lng])
+            puts('#######')
+                if @host.update(host_params)
+                redirect_to :action => "mainpage", :controller => "hosts"
+                else
+                flash[:error] = "Error in saving host"
+                end
+            end
+      else
+            puts ("#############################################")
+            items=params.size-6;
+            @menu = Menu.new(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
+            respond_to do |format|
+              if @menu.save
+                puts(@menu.id)
+                MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
+                for i in 1..items
+                  itemFeild="Items"+i.to_s;
+                  descFeild="Desc"+i.to_s;
+                  typeFeild="Type"+i.to_s;
+                  tasteFeild="Taste"+i.to_s;
+
+                  @item=Item.new(name:params[itemFeild],desc:params[descFeild],typeItem:params[typeFeild],tastetype:params[tasteFeild],Menu_id:@menu.id)
+
+                  if (@item.name && !@item.name.blank?)
+                      @item.save;
+                  end
+
+                end
+
+                format.html { redirect_to :back, notice: 'Menu was successfully created.' }
+                format.json { render :show, status: :created, location: @menu }
+              else
+                format.html { render :new }
+                format.json { render json: @menu.errors, status: :unprocessable_entity }
+              end
+            end
       end
 
   end
@@ -201,7 +205,7 @@ class HostsController < ApplicationController
     def createMenu
       puts ("#############################################")
       items=params.size-6;
-      @menu = Menu.new(menu_params)
+      @menu = Menu.new(menuTitle:params[menu][menuTitle] ,menuName:params[menu][menuName], menuType:params[menu][menuType],experience:params[menu][experience],timeSlot:params[menu][timeSlot],numberGuests:params[menu][noOfGuest],daysServed:params[menu][daysServed] )
       respond_to do |format|
         if @menu.save
           puts(@menu.id)
@@ -227,8 +231,9 @@ class HostsController < ApplicationController
   end
 
   def previewAlbumMenu
-    @menu_attachments = PostAttachment.find_by_sql('select * from menu_attachments')
-
+    @menu_attachments = MenuAttachment.find_by_sql('select * from menu_attachments where Menu_id=0')
+  puts("*********************************")
+    puts(@menu_attachments.size)
     respond_to do |format|
       format.html
       format.js {}
@@ -238,9 +243,7 @@ class HostsController < ApplicationController
     end
   end
 
-  def menu_params
-    params.require(:menu).permit(:menuType,:experience)
-  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
