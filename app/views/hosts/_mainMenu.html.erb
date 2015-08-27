@@ -2,23 +2,82 @@
 <h1> Create Your Menu</h1>
 <%= form_for :menu , :url => {:controller => 'hosts',:action =>"create"} do |f| %>
 
+    <div class="form-group">
+
+      <%= f.text_field :menuTitle,:class=>'form-control',:placeholder =>'Menu Title' %>
+    </div>
 
     <div class="form-group">
 
-      <%= f.text_field :menuType,:placeholder =>'Menu Type' %>
+      <%= f.text_field :menuName,:class=>'form-control',:placeholder =>'Menu Name' %>
+    </div>
+
+
+    <div class="form-group">
+
+      <%= f.text_field :menuType,:class=>'form-control',:placeholder =>'Menu Type' %>
     </div>
     <div class="form-group">
 
-      <%= f.text_field :experience , :placeholder => 'Experience'%>
+      <%= f.text_field :experience  ,:class=>'form-control',:placeholder => 'Experience'%>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :timeSlot,:class=>'form-control',:placeholder =>'Time Slot' %>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :daysServed,:class=>'form-control',:placeholder =>'Days Served' %>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :noOfGuest,:class=>'form-control',:placeholder =>'No Of Guests' %>
+    </div>
+
+    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal1">Upload Photos of Menu</button>
+    <button type="button" class="btn btn-sm btn-success" data-toggle="modal"  id="previewPhoto" > Preview Photo</button>
+    <div class="btn btn-sm btn-warning" onClick="addNewItem('itemsList');">Add an Item</div>
+    <div id='itemsList' style="padding-top: 10px">
     </div>
     <div class="actions">
-      <%= f.submit 'Create Menu', :class => 'btn btn-primary'%>
+      <%= f.submit 'Create Menu', :class => 'btn btn-sm btn-primary'%>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">Upload Photos of Menu</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal"  id="previewPhoto" > Preview Photo</button>
-    <div class="btn btn-info" onClick="addNewItem('itemsList');">Add an Item</div>
-    <div id='itemsList'>
-    </div>
-
 <% end %>
 
+<script>
+    $("#previewPhoto").click( function() {
+// send an AJAX request to fetch the data
+        $.ajax({
+            url:  "<%= '/hosts/previewAlbumMenu' %>", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            complete: function() {},
+
+            success: function(data) {
+                $('#media-contents').empty();
+                var y='<ul class="row">';
+               // $('#media-contents').append(' <ul class="row">');
+                $.each(data.attachments, function(i, attachment) {
+                    y = y+' <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">'+'<img src='+ attachment.avatar.url + ' height="100" width="100">'+'</li>';
+                    //$('#media-contents').append(' <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">'+'<img src='+ attachment.avatar.url + ' height="100" width="100">'+'</li>');
+                });
+              //  $('#media-contents').append(' </ul>');
+                y= y+'</ul>';
+                $('#media-contents').append(y);
+                jQuery("#previewModal").modal({
+                    show: true
+
+                });
+
+            },
+            error: function() {
+                alert("Ajax error!")
+            }
+        });
+
+        return false;
+    });
+</script>

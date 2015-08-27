@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'menus/new'
   post 'menus/create_photo'
   get 'menus/previewAlbum'
+  get 'hosts/previewAlbumMenu'
   get 'order_tables/checkAvailability'
   get 'payments/index'
   get 'payments/show'
