@@ -89,7 +89,7 @@
 
               <div class="pull-right" id="acceptRejectButtons<%=orderForGuest.id%>">
                 <% if (orderForGuest.status=="new") %>
-                    <a href="#" class="btn btn-primary" onclick="setorderForGuestAccept(<%=orderForGuest.id%>)">Accept</a>
+                    <a href="#" class="btn btn-primary" onclick="setorderForGuestAccept(<%= orderForGuest.id %>,<%= orderForGuest.menu_id %>,<%= orderForGuest.date %>,<%= orderForGuest.number_of_guests %>)">Accept</a>
                     <span class="dropdown">
 
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -122,12 +122,12 @@
 </div>
 
 <script>
-    function setorderForGuestAccept(myID) {
+    function setorderForGuestAccept(myID,menuID,orderDate,guestCount) {
         $.ajax({
             url: "<%= '/order_tables/updateOrderForGuestAccept' %>", // Route to the Script Controller method
             type: "GET",
             dataType: "json",
-            data: { orderID: myID },
+            data: { orderID: myID,menuID:menuID,orderDate:orderDate,guestCount:guestCount },
             complete: function() {},
             success: function(data) {
                 var orderForGuestcount= document.getElementById('unreadOrderCount');

@@ -70,6 +70,7 @@ class OrderTablesController < ApplicationController
 
   def updateOrderForGuestAccept
     OrderTable.where( id: params[:orderID]).update_all( status: 'accepted' )
+    MailToGuest.accept(params[:menuID],'dd',params[:guestCount]).deliver_later
     @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
     session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
         respond_to do |format|
@@ -111,6 +112,7 @@ class OrderTablesController < ApplicationController
       myOrders.each do |orderForGuest|
         myGuestsCount=myGuestsCount+orderForGuest.number_of_guests
       end
+      myGuestsCount=myGuestsCount+params[:guestCount]
       myMenu=Menu.find(params[:menuID].to_i)
       if (myMenu.numberGuests.to_i<myGuestsCount)
         isAvailable='no'
