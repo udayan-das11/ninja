@@ -226,6 +226,17 @@ class HostsController < ApplicationController
     end
   end
 
+  def previewAlbumMenu
+    @menu_attachments = PostAttachment.find_by_sql('select * from menu_attachments')
+
+    respond_to do |format|
+      format.html
+      format.js {}
+      format.json {
+        render json: {:attachments => @menu_attachments}
+      }
+    end
+  end
 
   def menu_params
     params.require(:menu).permit(:menuType,:experience)

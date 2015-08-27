@@ -22,3 +22,37 @@
 
 <% end %>
 
+<script>
+    $("#previewPhoto").click( function() {
+// send an AJAX request to fetch the data
+        $.ajax({
+            url:  "<%= '/hosts/previewAlbumMenu' %>", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            complete: function() {},
+
+            success: function(data) {
+                $('#media-contents').empty();
+                var y='<ul class="row">';
+               // $('#media-contents').append(' <ul class="row">');
+                $.each(data.attachments, function(i, attachment) {
+                    y = y+' <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">'+'<img src='+ attachment.avatar.url + ' height="100" width="100">'+'</li>';
+                    //$('#media-contents').append(' <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">'+'<img src='+ attachment.avatar.url + ' height="100" width="100">'+'</li>');
+                });
+              //  $('#media-contents').append(' </ul>');
+                y= y+'</ul>';
+                $('#media-contents').append(y);
+                jQuery("#previewModal").modal({
+                    show: true
+
+                });
+
+            },
+            error: function() {
+                alert("Ajax error!")
+            }
+        });
+
+        return false;
+    });
+</script>
