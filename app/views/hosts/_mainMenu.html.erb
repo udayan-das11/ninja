@@ -1,6 +1,6 @@
 
 <h1> Create Your Menu</h1>
-<%= form_for :menu , :url => {:controller => 'hosts',:action =>"create"} do |f| %>
+<%= form_for :menu , :url => url_for(:controller => 'hosts', :action => 'create'),:remote => true do |f| %>
 
     <div class="form-group">
 

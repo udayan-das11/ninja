@@ -131,12 +131,11 @@ class HostsController < ApplicationController
             end
 
           end
+          @menus=Menu.all
+          format.js {}
 
-          format.html { redirect_to :back, notice: 'Menu was successfully created.' }
-          format.json { render :show, status: :created, location: @menu }
         else
-          format.html { render :new }
-          format.json { render json: @menu.errors, status: :unprocessable_entity }
+          format.js {}
         end
       end
     end
