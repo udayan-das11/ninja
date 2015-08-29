@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   root 'hosts#index'
   post 'hosts/create_photo'
   get 'hosts/previewAlbum'
-
+  get 'hosts/test'
   #menus
   post 'hosts/create_photo_menus'
   get 'hosts/menuAdd'
@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   get 'menus/previewAlbum'
   get 'hosts/previewAlbumMenu'
   get 'order_tables/checkAvailability'
+  get 'payments/index'
+  get 'payments/show'
+  post 'payments/create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
