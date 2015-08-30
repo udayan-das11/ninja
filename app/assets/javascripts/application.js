@@ -15,6 +15,7 @@
 //= require turbolinks
 //=require bootstrap
 //=require dropzone
+//=require jquery.smartWizard-2.0
 //= require underscore
 //= require gmaps/google
 

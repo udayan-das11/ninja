@@ -123,9 +123,7 @@ class HostsController < ApplicationController
             descFeild="Desc"+i.to_s;
             typeFeild="Type"+i.to_s;
             tasteFeild="Taste"+i.to_s;
-
             @item=Item.new(name:params[itemFeild],desc:params[descFeild],typeItem:params[typeFeild],tastetype:params[tasteFeild],Menu_id:@menu.id)
-
             if (@item.name && !@item.name.blank?)
               @item.save;
             end
@@ -133,7 +131,6 @@ class HostsController < ApplicationController
           end
           @menu_attachments = MenuAttachment.where("menu_id = ?", @menu.id)
           @items=Item.where("menu_id = ?", @menu.id)
-          puts("**********************************")
           format.js {}
 
         else
@@ -184,7 +181,7 @@ class HostsController < ApplicationController
     @reviews=Review.order( "created_at DESC")
     @unread_review_count=Review.where("status='new'").count
     session[:pendingOrdersCount]=OrderTable.where("status = ? AND Host_id = ?", 'new', 1).count
-    puts("In menu addddddddd")
+
     MenuAttachment.where("Menu_id=0").delete_all
   end
 
@@ -247,7 +244,34 @@ class HostsController < ApplicationController
     end
   end
 
+def editMenu
+  @menu = Menu.find(params[:id])
+  @items= Item.where(menu_id: @menu.id)
+  @menu_attachment= MenuAttachment.where(menu_id: @menu.id)
+  respond_to do |format|
+    format.js {}
+  end
+end
 
+ def saveMenuAfterEdit
+   @menu = Menu.find(params[:id])
+   puts("*****************************")
+   puts(@menu.timeSlot)
+   puts(params[:menu][:menuTitle])
+   @menu.update_attributes!(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
+   @menu.save
+   puts("*********************&&&&&&&&&&&&&&&&7********")
+   params[:menu][:items_attributes].each do |key, value|
+     item= Item.find_by(id:value["id"])
+     item.update_attributes(name:value["name"],desc:value["desc"],tastetype:value["tastetype"])
+     item.save
+   end
+  @items= Item.where(menu_id: @menu.id)
+  @menu_attachments= MenuAttachment.where(menu_id: @menu.id)
+   respond_to do |format|
+     format.js {}
+   end
+ end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_host

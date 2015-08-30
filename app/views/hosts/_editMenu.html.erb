@@ -1,0 +1,50 @@
+<%= form_for @menu ,:url => url_for(:controller => 'hosts', :action => 'editMenu') ,:remote => true do |f| %>
+
+    <div class="form-group">
+
+      <%= f.text_field :menuTitle,:class=>'form-control',:placeholder =>'Menu Title' %>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :menuName,:class=>'form-control',:placeholder =>'Menu Name' %>
+    </div>
+
+
+    <div class="form-group">
+
+      <%= f.text_field :menuType,:class=>'form-control',:placeholder =>'Menu Type' %>
+    </div>
+    <div class="form-group">
+
+      <%= f.text_field :experience  ,:class=>'form-control',:placeholder => 'Experience'%>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :timeSlot,:class=>'form-control',:placeholder =>'Time Slot' %>
+    </div>
+
+    <div class="form-group">
+
+      <%= f.text_field :daysServed,:class=>'form-control',:placeholder =>'Days Served' %>
+    </div>
+    <div><h3 >Item</h3></div>
+    <%= f.fields_for :items do |ff| %>
+        <div class="row">
+          <div class="col-sm-2 col-xs-2">
+          <%= ff.text_field :name %>
+        </div>
+          <div class="col-sm-2 col-xs-2">
+          <%= ff.text_field :desc %>
+        </div>
+
+        <div class="col-sm-2 col-xs-2">
+          <%= ff.text_field :tastetype %>
+        </div>
+    </div>
+    <% end %>
+
+
+    <%= button_to 'Submit Details', updateMenu_path, method: :patch %>
+<% end %>

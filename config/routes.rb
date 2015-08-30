@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   get 'hosts/menuAdd'
 
   post 'hosts/createMenu'
+  get 'editMenu/:id', to: 'hosts#editMenu' , :as => :editMenu
+  patch 'editMenu/:id', to: 'hosts#saveMenuAfterEdit', :as => :updateMenu
   #menus
   get 'menus/index'
   post 'menus/create'
