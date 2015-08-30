@@ -131,7 +131,9 @@ class HostsController < ApplicationController
             end
 
           end
-          @menus=Menu.all
+          @menu_attachments = MenuAttachment.where("menu_id = ?", @menu.id)
+          @items=Item.where("menu_id = ?", @menu.id)
+          puts("**********************************")
           format.js {}
 
         else

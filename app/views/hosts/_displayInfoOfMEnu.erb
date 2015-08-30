@@ -1,10 +1,56 @@
+<style>
+    #profile{
+        margin-left:30px;
+        height:10px;
+        width:150px;
+    }
+    #box{
+        height:50px;
+        width:170px;
+        border:solid 1px #000099;
+        padding-left:55px;
+        padding-top:15px;
+        margin:9px;
+    }
+    #box1{
+        height:50px;
+        width:170px;
+        padding-left:55px;
+        padding-top:15px;
+        margin:9px;
+    }
+    #img-size{
+        margin:15px;
+        border:solid 1px #0033FF;
+    }
+</style>
+      <div class="row" align="center">
+        <img src="images/new-img.jpg" class="img-circle img-responsive">
+      </div>
+      <hr/>
+      <div class="row" style="margin-left: 10px">
+        <div ><h3 >Menu</h3></div>
+        <div class="col-sm-2 col-xs-2" id="box">  <%= @menu.menuName %></div>
+        <div class="col-sm-2 col-xs-2" id="box">  <%= @menu.menuType %></div>
+        <div class="col-sm-2 col-xs-2" id="box"> <%= @menu.menuTitle %></div>
+        <div class="col-sm-2 col-xs-2" id="box"> <%= @menu.daysServed %></div>
+        <div class="col-sm-2 col-xs-2" id="box"> <%= @menu.numberGuests %></div>
+        <div class="col-sm-2 col-xs-2" id="box"> <%= @menu.timeSlot %></div>
+      </div>
+      <hr/>
+      <div class="row" id="box">
+        <div><h3 >Item</h3></div>
+        <% @items.each do |item| %>
+            <div class="col-sm-2 col-xs-2" id="box1"><%= item.name %></div>
+        <% end %>
 
-    <p>
-      <strong>Host:</strong>
-      <%= @menu.menuName %>
-    </p>
+      </div>
+      <hr/>
+      <div class="row">
+        <div><h3>Menu Images</h3></div>
+        <% @menu_attachments.each do |menu_attachment| %>
+            <div class="col-sm-2 " ><%= image_tag(menu_attachment.avatar.url, size: "150")%></div>
+        <% end %>
 
-    <p>
-      <strong>Avatar:</strong>
-      <%= @menu.menuType %>
-    </p>
+      </div>
+
