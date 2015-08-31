@@ -1,7 +1,7 @@
 /**
  * Created by saaror on 24-08-2015.
  */
-;(function ( $, window, document, undefined ) {
+(function ( $, window, document, undefined ) {
 
     var defaults = {
         orientation: 'left',

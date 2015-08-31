@@ -18,4 +18,10 @@
 //=require jquery.smartWizard-2.0
 //= require underscore
 //= require gmaps/google
+//=require  modernizr.custom
+//= require SmoothScroll
+//= require jquery.isotope
+//=require owl.carousel
+//=require jquery.sidepanel
+
 
