@@ -1,1 +1,1 @@
-$('#userreviews').html("<%= escape_javascript(render :partial => 'loadOrdersForGuests') %>");
+$('#userreviews').html("<%= escape_javascript(render :partial => 'loadOrdersForGuests',:locals => { :orderForGuests => @orderForGuests }  )  %>");

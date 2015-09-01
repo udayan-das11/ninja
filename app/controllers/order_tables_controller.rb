@@ -62,7 +62,7 @@ class OrderTablesController < ApplicationController
   end
 
   def loadOrdersForGuests
-    @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC')
+    @orderForGuests=OrderTable.where(:Host_id => '1').order('created_at DESC').page(params[:page]).per(5)
     respond_to do |format|
       format.js
     end

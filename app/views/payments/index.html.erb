@@ -39,18 +39,16 @@
           </div>
         </div>
         <div class='form-row'>
-          <div class='col-xs-4 form-group cvc required'>
-            Card Verification Value (CVV)
-            <%= c.text_field :card_verification %>
-          </div>
-          <div class='col-xs-4 form-group expiration required'>
-           Expires On
-            <%= c.date_select :card_expires_on %>
-          </div>
-          <div class='col-xs-4 form-group expiration required'>
-            <label class='control-label'>Year</label>
-            <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
-          </div>
+              <div class='col-xs-4 form-group cvc required'>
+                Card Verification Value (CVV)
+                <%= c.text_field :card_verification %>
+              </div>
+        </div>
+        <div class='form-row'>
+              <div class='col-xs-4 form-group expiration required'>
+               Expires On
+                <%= c.date_select :card_expires_on %>
+              </div>
         </div>
         <div class='form-row'>
           <div class='col-md-12'>

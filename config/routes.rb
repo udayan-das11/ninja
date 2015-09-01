@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :hosts, controllers: { registrations: 'registrations',sessions: 'sessions',confirmations: 'confirmations',passwords: 'passwords'}
   resources :menu_attachments
   resources :post_attachments
   resources :items
@@ -44,6 +45,12 @@ Rails.application.routes.draw do
   get 'payments/index'
   get 'payments/show'
   post 'payments/create'
+
+  devise_scope :host do
+    get "/thanks" => "registrations#thanks"
+
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

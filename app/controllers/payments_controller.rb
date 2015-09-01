@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     puts('##########'+request.remote_ip)
     @payment.card.ip_address = request.remote_ip
-    if @payment.save
+    if credit_card(@payment.card).valid?
           response = GATEWAY.purchase(300,credit_card(@payment.card),:ip => @payment.card.ip_address)
           puts(response.to_json)
           if response.success?
@@ -23,6 +23,7 @@ class PaymentsController < ApplicationController
           end
 
     else
+      puts('$$$$$$$$  card not valid')
       redirect_to :action => "index", :controller => "ninja"
     end
   end
