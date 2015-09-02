@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   resources :menu_attachments
   resources :post_attachments
   resources :items
-  resources :menus
   resources :image_gallaries
   resources :users
   get 'hosts/index'
   get 'hosts/mainpage'
   get 'ninja/index'
+  get 'ninja/trial'
   get 'ninja/show'
   get 'hosts/create'
   get 'hosts/reviews'
@@ -27,20 +27,19 @@ Rails.application.routes.draw do
   post 'hosts/create_photo'
   get 'hosts/previewAlbum'
   get 'hosts/test'
-  #menus
-  post 'hosts/create_photo_menus'
-  get 'hosts/menuAdd'
 
-  post 'hosts/createMenu'
-  get 'editMenu/:id', to: 'hosts#editMenu' , :as => :editMenu
-  patch 'editMenu/:id', to: 'hosts#saveMenuAfterEdit', :as => :updateMenu
   #menus
   get 'menus/index'
   post 'menus/create'
   get 'menus/new'
-  post 'menus/create_photo'
-  get 'menus/previewAlbum'
-  get 'hosts/previewAlbumMenu'
+  post 'menus/create_photo_menus'
+  get 'menus/previewAlbumMenu'
+  get 'menus/menuAdd'
+  get 'editMenu/:id', to: 'menus#editMenu' , :as => :editMenu
+  patch 'editMenu/:id', to: 'menus#saveMenuAfterEdit', :as => :updateMenu
+  post 'menus/createNew'
+
+
   get 'order_tables/checkAvailability'
   get 'payments/index'
   get 'payments/show'

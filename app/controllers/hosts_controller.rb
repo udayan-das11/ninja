@@ -45,7 +45,7 @@ class HostsController < ApplicationController
   end
 
 
-  # GET /hosts/1/edit
+  # GET /hosts/1/editMenu
   def edit
   end
 
@@ -82,7 +82,7 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    if(1==2)
+
       if (!params[:host][:uuid]&&!Host.exists?(emailid: params[:host][:emailid]))
         mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
         myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
@@ -110,36 +110,8 @@ class HostsController < ApplicationController
           flash[:error] = "Error in saving host"
         end
       end
-    else
-      puts ("#############################################")
-      items=params.size-6;
-      @menu = Menu.new(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
-      respond_to do |format|
-        if @menu.save
-          puts(@menu.id)
-          MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
-          for i in 1..items
-            itemFeild="Items"+i.to_s;
-            descFeild="Desc"+i.to_s;
-            typeFeild="Type"+i.to_s;
-            tasteFeild="Taste"+i.to_s;
-            @item=Item.new(name:params[itemFeild],desc:params[descFeild],typeItem:params[typeFeild],tastetype:params[tasteFeild],Menu_id:@menu.id)
-            if (@item.name && !@item.name.blank?)
-              @item.save;
-            end
-
-          end
-          @menu_attachments = MenuAttachment.where("menu_id = ?", @menu.id)
-          @items=Item.where("menu_id = ?", @menu.id)
-          format.js {}
-
-        else
-          format.js {}
-        end
-      end
-    end
-
   end
+
 
   # PATCH/PUT /hosts/1
   # PATCH/PUT /hosts/1.json
@@ -185,93 +157,6 @@ class HostsController < ApplicationController
     MenuAttachment.where("Menu_id=0").delete_all
   end
 
-  #menus related Code
-  #menus
-  def create_photo_menus
-    @menu_attachment =  MenuAttachment.new(avatar: params[:file] , menu_id:'0')
-    @menu_attachment.save
-    respond_to do |format|
-      format.json{ render :json => @menu_attachment }
-    end
-
-    def menuAdd
-      # @menus = Menu.all
-
-      @menu = Menu.new
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def createMenu
-      puts ("#############################################")
-      items=params.size-6;
-      @menu = Menu.new(menuTitle:params[menu][menuTitle] ,menuName:params[menu][menuName], menuType:params[menu][menuType],experience:params[menu][experience],timeSlot:params[menu][timeSlot],numberGuests:params[menu][noOfGuest],daysServed:params[menu][daysServed] )
-      respond_to do |format|
-        if @menu.save
-          puts(@menu.id)
-          MenuAttachment.where(menu_id: '0').update_all(menu_id:@menu.id)
-          for i in 1..items
-            itemFeild="Items"+i.to_s;
-            @item=Item.new(name:params[itemFeild],Menu_id:@menu.id)
-
-            if (@item.name && !@item.name.blank?)
-              @item.save;
-            end
-
-          end
-
-          format.html { redirect_to :back, notice: 'Menu was successfully created.' }
-          format.json { render :show, status: :created, location: @menu }
-        else
-          format.html { render :new }
-          format.json { render json: @menu.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-  end
-
-  def previewAlbumMenu
-    @menu_attachments = MenuAttachment.find_by_sql('select * from menu_attachments where Menu_id=0')
-    puts("*********************************")
-    puts(@menu_attachments.size)
-    respond_to do |format|
-      format.html
-      format.js {}
-      format.json {
-        render json: {:attachments => @menu_attachments}
-      }
-    end
-  end
-
-def editMenu
-  @menu = Menu.find(params[:id])
-  @items= Item.where(menu_id: @menu.id)
-  @menu_attachment= MenuAttachment.where(menu_id: @menu.id)
-  respond_to do |format|
-    format.js {}
-  end
-end
-
- def saveMenuAfterEdit
-   @menu = Menu.find(params[:id])
-   puts("*****************************")
-   puts(@menu.timeSlot)
-   puts(params[:menu][:menuTitle])
-   @menu.update_attributes!(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
-   @menu.save
-   puts("*********************&&&&&&&&&&&&&&&&7********")
-   params[:menu][:items_attributes].each do |key, value|
-     item= Item.find_by(id:value["id"])
-     item.update_attributes(name:value["name"],desc:value["desc"],tastetype:value["tastetype"])
-     item.save
-   end
-  @items= Item.where(menu_id: @menu.id)
-  @menu_attachments= MenuAttachment.where(menu_id: @menu.id)
-   respond_to do |format|
-     format.js {}
-   end
- end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_host

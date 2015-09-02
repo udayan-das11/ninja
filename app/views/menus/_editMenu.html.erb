@@ -1,4 +1,4 @@
-<%= form_for @menu ,:url => url_for(:controller => 'hosts', :action => 'editMenu') ,:remote => true do |f| %>
+<%= form_for @menu ,:url => url_for(:controller => 'menus', :action => 'editMenu') ,:remote => true do |f| %>
 
     <div class="form-group">
 
@@ -46,5 +46,5 @@
     <% end %>
 
 
-    <%= button_to 'Submit Details', updateMenu_path, method: :patch %>
+    <%= button_to 'Submit Details', updateMenu_path, method: :patch, :class => 'btn btn-sm btn-primary' %>
 <% end %>

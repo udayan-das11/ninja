@@ -1,6 +1,6 @@
 
 <h1> Create Your Menu</h1>
-<%= form_for :menu , :url => url_for(:controller => 'hosts', :action => 'create'),:remote => true do |f| %>
+<%= form_for @menu, :url => url_for(:controller => 'menus', :action => 'create'),:remote => true do |f| %>
 
     <div class="form-group">
 
@@ -38,16 +38,15 @@
     <div class="btn btn-sm btn-warning" onClick="addNewItem('itemsList');">Add an Item</div>
     <div id='itemsList' style="padding-top: 10px">
     </div>
-    <div class="actions">
-      <%= f.submit 'Create Menu', :class => 'btn btn-sm btn-primary'%>
-    </div>
+
+    <%= button_to 'Submit Details', menus_create_path, method: :post, :class => 'btn btn-sm btn-primary' %>
 <% end %>
 
 <script>
     $("#previewPhoto").click( function() {
 // send an AJAX request to fetch the data
         $.ajax({
-            url:  "<%= '/hosts/previewAlbumMenu' %>", // Route to the Script Controller method
+            url:  "<%= '/menus/previewAlbumMenu' %>", // Route to the Script Controller method
             type: "GET",
             dataType: "json",
             complete: function() {},

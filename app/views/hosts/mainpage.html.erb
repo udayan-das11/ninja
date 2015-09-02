@@ -546,7 +546,7 @@
             <h4 class="modal-title" id="myModalLabel">Upload New</h4>
           </div>
           <div class="modal-body">
-            <%= form_tag '/hosts/create_photo_menus', method: :post, remote:true,class: "dropzone", id: "media-dropzone" do %>
+            <%= form_tag '/menus/create_photo_menus', method: :post, remote:true,class: "dropzone", id: "media-dropzone" do %>
                 <div class="fallback">
                   <%= file_field_tag "media", multiple: true%>
                 </div>
@@ -615,14 +615,14 @@
 						});
 
 						$("#menu").click(function(){
-						var myMenu=document.getElementById('main-menu')
+						var myMenu=document.getElementById('main-menu');
 						$( myMenu).empty();
 						var newdiv1 = document.createElement('li'); // Create dynamic element
 						myMenu.appendChild(newdiv1);			
 						var aTag = document.createElement('a');
                         aTag.setAttribute('class','active-menu');
                         aTag.setAttribute('data-remote','true');
-                        aTag.setAttribute("href","/hosts/menuAdd");
+                        aTag.setAttribute("href","/menus/menuAdd");
 						aTag.innerHTML = "Create";
 						newdiv1.appendChild(aTag);
 						
