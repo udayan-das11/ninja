@@ -32,19 +32,34 @@
     <div><h3 >Item</h3></div>
     <%= f.fields_for :items do |ff| %>
         <div class="row">
-          <div class="col-sm-2 col-xs-2">
-          <%= ff.text_field :name %>
-        </div>
-          <div class="col-sm-2 col-xs-2">
-          <%= ff.text_field :desc %>
-        </div>
+          <div class="col-md-3">
+          <%= ff.text_field :name ,:class=>'form-control'%>
+          </div>
 
-        <div class="col-sm-2 col-xs-2">
-          <%= ff.text_field :tastetype %>
-        </div>
+          <div class="col-md-3">
+          <%= ff.text_field :desc ,:class=>'form-control' %>
+          </div>
+
+          <div class="col-md-3">
+          <%= ff.text_field :tastetype ,:class=>'form-control'%>
+              </div>
     </div>
     <% end %>
 
+    <%= f.fields_for :menu_attachments do |attachment| %>
+        <% if attachment.object.new_record? %>
+            <%= attachment.file_field :avatar %>
+
+        <% else %>
+            <%= image_tag(attachment.object.avatar.url, size: "150") %>
+            <%= attachment.check_box :_destroy %>
+
+        <% end %>
+    <% end %>
+
+    <div id='itemsList' style="padding-top: 10px"></div>
+    <div class="btn btn-sm btn-warning" onClick="addNewItem('itemsList');">Add an Item</div>
 
     <%= button_to 'Submit Details', updateMenu_path, method: :patch, :class => 'btn btn-sm btn-primary' %>
+    <%= link_to 'Back', menus_menuAdd_path ,:remote => true , :class => 'btn btn-sm btn-primary'%>
 <% end %>

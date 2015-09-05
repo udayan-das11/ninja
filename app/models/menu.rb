@@ -3,4 +3,5 @@ class Menu < ActiveRecord::Base
   has_many :menu_attachments
   has_many :items
   accepts_nested_attributes_for :items
+  accepts_nested_attributes_for :menu_attachments
 end

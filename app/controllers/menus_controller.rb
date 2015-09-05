@@ -119,7 +119,8 @@ class MenusController < ApplicationController
 
     def create
       puts ("#############################################")
-      items=params.size-6
+      items=(params.size-5)/4
+      puts(items)
       @menu = Menu.new(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
       respond_to do |format|
         if @menu.save
@@ -172,11 +173,26 @@ class MenusController < ApplicationController
   def saveMenuAfterEdit
     @menu = Menu.find(params[:id])
     puts("*****************************")
+    items=(params.size-7)/4
+   puts(items)
+
     puts(@menu.timeSlot)
     puts(params[:menu][:menuTitle])
     @menu.update_attributes!(menuTitle:params[:menu][:menuTitle] ,menuName:params[:menu][:menuName], menuType:params[:menu][:menuType],experience:params[:menu][:experience],timeSlot:params[:menu][:timeSlot],numberGuests:params[:menu][:noOfGuest],daysServed:params[:menu][:daysServed] )
     @menu.save
     puts("****************** ***&&&&&&&&&&&&&&&&7********")
+    #new item
+    for i in 1..items
+      itemFeild="Items"+i.to_s;
+      descFeild="Desc"+i.to_s;
+      typeFeild="Type"+i.to_s;
+      tasteFeild="Taste"+i.to_s;
+      @item=Item.new(name:params[itemFeild],desc:params[descFeild],typeItem:params[typeFeild],tastetype:params[tasteFeild],Menu_id:@menu.id)
+      if (@item.name && !@item.name.blank?)
+        @item.save;
+      end
+    end
+    #editing old items
     if( !params[:menu][:items_attributes].nil?)
     params[:menu][:items_attributes].each do |key, value|
       item= Item.find_by(id:value["id"])
@@ -184,6 +200,15 @@ class MenusController < ApplicationController
       item.save
     end
     end
+
+    if( !params[:menu][:menu_attachments_attributes].nil?)
+      params[:menu][:menu_attachments_attributes].each do |key, value|
+        if(value["_destroy"] == '1' )
+          photo= MenuAttachment.find_by(id:value["id"])
+          photo.destroy
+        end
+      end
+     end
     @items= Item.where(menu_id: @menu.id)
     @menu_attachments= MenuAttachment.where(menu_id: @menu.id)
     respond_to do |format|
