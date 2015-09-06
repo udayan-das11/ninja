@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'hosts#index'
   post 'hosts/create_photo'
+  post 'hosts/create_coverphoto'
+  post 'hosts/create_profilephoto'
   get 'hosts/previewAlbum'
   get 'hosts/test'
 

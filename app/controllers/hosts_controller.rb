@@ -64,8 +64,8 @@ class HostsController < ApplicationController
 
   def create_photo
     # @post_attachments=@host.post_attachments.all
-    puts("******************************************************");
-    puts( params[:file]);
+    puts("******************************************************")
+    puts( params[:file])
     @post_attachment =  PostAttachment.new(avatar: params[:file] , host_id:session[:hostid])
 
     respond_to do |format|
@@ -75,6 +75,40 @@ class HostsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @post_attachment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_profilephoto
+    # @post_attachments=@host.post_attachments.all
+    puts("******************************************************")
+    puts( params[:file])
+    @profile_photo=  ProfilePhoto.new(avatar: params[:file] , host_id:session[:hostid])
+
+    respond_to do |format|
+      if @profile_photo.save
+        format.html { redirect_to @host, notice: 'Post attachment was successfully created.' }
+        format.json { render :index, status: :created, location: @host }
+      else
+        format.html { render :new }
+        format.json { render json: @profile_photo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_coverphoto
+    # @post_attachments=@host.post_attachments.all
+    puts("******************************************************")
+    puts( params[:file])
+    @cover_photo =  CoverPhoto.new(avatar: params[:file] , host_id:session[:hostid])
+
+    respond_to do |format|
+      if @cover_photo.save
+        format.html { redirect_to @host, notice: 'Post attachment was successfully created.' }
+        format.json { render :index, status: :created, location: @host }
+      else
+        format.html { render :new }
+        format.json { render json: @cover_photo.errors, status: :unprocessable_entity }
       end
     end
   end
