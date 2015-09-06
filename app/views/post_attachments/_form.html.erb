@@ -23,3 +23,14 @@
     <%= f.submit %>
   </div>
 <% end %>
+<div id="my-tooltip">
+  This div has a tooltip with HTML when you hover over it!
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#my-tooltip').tooltipster({
+            content: $('<span><img src="/assets/P01.jpg" width="50px" height = "50px"/> <strong>This text is in bold case !</strong></span>')
+        });
+    });
+</script>
