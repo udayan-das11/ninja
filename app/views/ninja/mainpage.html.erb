@@ -1,0 +1,398 @@
+<script src="//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry" type="text/javascript"></script>
+<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>
+<style>
+    nav {
+        background: #2d2f33;
+        display: block;
+        height: 100%;
+        overflow: auto;
+        position: fixed;
+        right: -20em;
+        font-size: 15px;
+        top: 0;
+        width: 20em;
+        z-index: 2000;
+        transition: right 0.3s ease-in-out 0s;
+        -webkit-transition: right 0.3s ease-in-out 0s;
+        -moz-transition: right 0.3s ease-in-out 0s;
+        -o-transition: right 0.3s ease-in-out 0s;
+
+    }
+    .nav-expanded nav {
+        right: 0;
+    }
+
+    body.nav-expanded {
+        margin-left: 0em;
+        transition: right 0.4s ease-in-out 0s;
+        -webkit-transition: right 0.4s ease-in-out 0s;
+        -moz-transition: right 0.4s ease-in-out 0s;
+        -o-transition: right 0.4s ease-in-out 0s;
+    }
+
+    #nav-close {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 300;
+        font-size: 24px;
+        padding-right: 10px;
+    }
+    .main-menu {
+        padding-top: 12px;
+    }
+
+    .main-menu li {
+        border-bottom: 1px solid #323949;
+        margin-left: 20px;
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .main-menu li a {
+        color: #6F7D8C;
+        text-decoration: none;
+    }
+
+    .main-menu li a:hover {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .main-menu li .sub-nav {
+        border-bottom: 0px;
+        padding: 4px;
+    }
+
+    .main-menu a .caret {
+        width: 0;
+        height: 0;
+        display: inline-block;
+        vertical-align: top;
+        border-top: 4px solid #4f5963;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        content: "";
+        margin-top: 8px;
+    }
+
+    .main-menu a:hover .caret {
+        border-top-color: #4f5963;
+    }
+
+    .main-menu li.open > a > .caret {
+        border-top: none;
+        border-bottom: 4px solid #4f5963;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+    }
+
+    .main-menu li.open > a:hover > .caret {
+        border-bottom-color: #4f5963;
+    }
+
+    .icon:before {
+        font-family: 'FontAwesome';
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1;
+        text-transform: none;
+        content: '\f105';
+    }
+
+    .main-menu li > a > span.icon {
+        float: right;
+        margin: 0.1em 1.7em -0.1em 0;
+        opacity: 0;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+
+    }
+
+    .main-menu li > a:hover > span.icon {
+        float: right;
+        margin: 0.1em 0.8em -0.1em 0;
+        opacity: 1;
+        width: 40%;
+    }
+    a.nav-expander {
+        background: none repeat scroll 0 0 #000000;
+        color: #FFFFFF;
+        display: block;
+        font-size: 15px;
+        font-weight: 400;
+        height: 50px;
+        margin-right: 0;
+        padding: 1em 1.6em 2em;
+        position: absolute;
+        right: 0;
+        text-decoration: none;
+        text-transform: uppercase;
+        top: 0;
+        transition: right 0.3s ease-in-out 0s;
+        width: 130px;
+        z-index: 12;
+
+        transition: right 0.3s ease-in-out 0s;
+        -webkit-transition: right 0.3s ease-in-out 0s;
+        -moz-transition: right 0.3s ease-in-out 0s;
+        -o-transition: right 0.3s ease-in-out 0s;
+
+    }
+
+    a.nav-expander:hover {
+        cursor: pointer ;
+    }
+
+    a.nav-expander.fixed {
+        position: fixed;
+    }
+
+
+    .nav-expanded a.nav-expander.fixed {
+        right: 20em;
+    }
+    #top-margin{
+        margin-top:60px;
+    }
+
+
+    .bigicon {
+        font-size: 67px;
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .top-right{
+        font-size:16px;
+        color:#FFF;
+        margin-top:20px;
+        margin-left:20px;
+    }
+    #logo{
+        border:solid 2px #00F;
+        margin-left:5px;
+        margin-bottom:5px;
+        margin-right:5px;
+        margin-top:5px;
+
+    }
+    #tile1 {
+        background:black;
+    }
+
+    #tile7 {
+        background: white;
+        margin-left:10px;
+        margin-right:10px;
+        margin-bottom:20px;
+
+    }
+
+    .tilecaption {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        margin: 0!important;
+        text-align: center;
+        color: white;
+        font-family: Segoe UI;
+        font-weight: lighter;
+    }
+
+    .carousel-caption {
+        top: auto;
+        bottom: 0;
+        vertical-align: bottom;
+        margin-bottom: 2%;
+    }
+
+    .main-text
+    {
+        position: absolute;
+        right: 0;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.4);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .image {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+    }
+    #margin-top{
+        margin-top:700px;
+    }
+    #img-align{
+        margin-top:50px;
+    }
+
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        padding: 50%;
+
+    }
+</style>
+
+<body>
+<ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+  <li class="mfb-component__wrap">
+    <a href="#" class="mfb-component__button--main">
+      <i class="mfb-component__main-icon--resting ion-plus-round"></i>
+      <i class="mfb-component__main-icon--active ion-close-round"></i>
+    </a>
+    <ul class="mfb-component__list">
+      <li>
+        <a href="#" class="mfb-component__button--child">
+          <i class="mfb-component__child-icon ion-social-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="mfb-component__button--child">
+          <i class="mfb-component__child-icon ion-social-octocat"></i>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="mfb-component__button--child">
+          <i class="mfb-component__child-icon ion-social-twitter"></i>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+  <!--Include your brand here-->
+  <a class="navbar-brand" href="#">WEBSITE LOGO</a>
+
+  <div class="navbar-header pull-right">
+    <a id="nav-expander" class="nav-expander">
+      <i class="fa fa-bars fa-2x"></i>
+    </a>
+  </div>
+</div>
+
+<nav >
+  <a href="#" id="nav-close" class="text-right pull-right">close</a>
+  <div style='width: 100%'>
+    <div id="mymap" style='width: 100%; height: 400px;'></div>
+  </div>
+  <div id="options">
+    <div >
+      <span> Date: </span>
+      <input type="date" id="dates">
+      <br/>
+      <br/>
+      <span> Type1: </span>
+      <select id="select1">
+        <option value="1"> 1</option>
+        <option value="2"> 2</option>
+        <option value="3"> 3</option>
+      </select>
+      <br/>
+      <br/>
+      <span> Type2: </span>
+      <input type="radio" id="options2" name="options" value="abc"/> abc
+      <input type="radio" id="options2" name="options" value="xyz"> xyz
+      <br/>
+      <br/>
+      <span> Budget: </span>
+      <input type="range" id="range" min="1000" max="5000" step="5" name="range" />
+      <br/>
+      <input type="submit" name="search" value="Search"  onclick="reloadPage()">
+    </div>
+  </div>
+</nav >
+<script>
+    function reloadPage(date,select,option,budget) {
+        var date=document.getElementById('dates').value;
+        var select=document.getElementById('select1').value;
+        var option=document.getElementById('options2').value;
+        var budget=document.getElementById('range').value;
+        document.getElementById('refreshPartialMainpage').html="";
+        $.ajax({
+            url: "<%= '/ninja/refreshPage' %>", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            data: {host:{ date: date,select:select,option:option,budget:budget}},
+            complete: function() {},
+            success: function(data) {
+                console.log(document.getElementById('refreshPartialMainpage').innerHTML);
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+
+
+                $('#refreshPartialMainpage').html(xhr.responseText);
+            }
+        });
+    }
+
+</script>
+<script>
+    $(document).ready(function(){
+
+        //Navigation Menu Slider
+        $('#nav-expander').on('click',function(e){
+            e.preventDefault();
+            $('body').toggleClass('nav-expanded');
+        });
+        $('#nav-close').on('click',function(e){
+            e.preventDefault();
+            $('body').removeClass('nav-expanded');
+        });
+
+        // Initialize navgoco with default options
+
+
+    });
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".tile").height($("#tile1").width());
+        $(".carousel").height($("#tile1").width());
+        $(".item").height($("#tile1").width());
+
+        $(window).resize(function () {
+            if (this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function () {
+                $(this).trigger('resizeEnd');
+            }, 10);
+        });
+
+        $(window).bind('resizeEnd', function () {
+            $(".tile").height($("#tile1").width());
+            $(".carousel").height($("#tile1").width());
+            $(".item").height($("#tile1").width());
+        });
+
+    });
+
+handler = Gmaps.build('Google');
+var markers;
+</script>
+<div id="refreshPartialMainpage">
+<%= render :partial => 'refreshPage' %>
+</div>
+
+
+</body>

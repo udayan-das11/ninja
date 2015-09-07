@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   post 'reviews/create'
   get 'reviews/index'
 
+  get 'ninja/mainpage'
+  get '/ninja/refreshPage'
+
   get 'order_tables/checkAvailability'
   get 'payments/index'
   get 'payments/show'

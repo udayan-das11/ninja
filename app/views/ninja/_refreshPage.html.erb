@@ -1,0 +1,109 @@
+<div class="container-fluid"id="margin-top">
+  <div></div>
+  <!-- Metro Tiles - START -->
+  <div class="container dynamicTile" >
+
+    <div class="row" >
+      <div class="col-sm-4">
+        <% $j=0 %>
+        <% puts('%%%%%%%%%%%%%%%%%%   '+@menus.size.to_s)%>
+        <% @menus.each do |menu| %>
+            <div class="col-sm-12 col-xs-12" id="myMapMarker<%= menu.id %>">
+              <div id="test">
+                <div class="panel panel-primary text-center no-boder bg-color-green">
+                  <% @hostName = Host.find(menu.Host_id)  %>
+                  <% @myProfilePhoto= ProfilePhoto.where(:host_id => @hostName.id) %>
+                  <div align="center"><%= image_tag(@myProfilePhoto.first.avatar.url,class:"img-circle img-responsive img-thumbnail", height:"50px",width:"200px")%></div>
+                  <div class="panel-body">
+                    <i class="fa fa-star" style="color:#F60"></i>
+                    <i class="fa fa-star" style="color:#F60"></i>
+                    <i class="fa fa-star" style="color:#F60"></i>
+                    <i class="fa fa-star-half" style="color:#F60"></i>
+
+                    <h4 style="color: #0A0A0A"><%= @hostName.username %></h4>
+                    <h5 style="color: #0A0A0A"><%= menu.menuTitle %></h5>
+                  </div>
+                  <div class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <% @myMenuPhotos = MenuAttachment.where(:menu_id => menu.id)  %>
+                      <div class="item active">
+                        <% if @myMenuPhotos.first %>
+                            <%= image_tag(@myMenuPhotos.first.avatar.url, size: "150")%>
+                        <% end %>
+                      </div>
+                      <% $i=1%>
+                      <% while $i < @myMenuPhotos.size  do%>
+                          <div class="item">
+                            <% if @myMenuPhotos[$i] %>
+                                <%= image_tag(@myMenuPhotos[$i].avatar.url, size: "150")%>
+                            <% end %>
+                          </div>
+                          <% $i=$i+1 %>
+                      <% end %>
+                    </div>
+                    <div class="main-text" style="height:20%;">
+                      <div class="col-sm-12 col-xs-12">
+                        <div class="row">
+                          <div class="col-md-6 pull-left">
+                            Price
+                          </div>
+                          <div class="col-md-6 pull-right">
+                            Something
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!--col-1st-close-->
+            <% @menuItems=Item.where(:menu_id => menu.id)%>
+            <script>
+
+                $('#myMapMarker<%= menu.id %>').tooltipster({
+
+                    position: 'right',
+                    content: $('<span>' +
+                            '<% @menuItems.each do |menuItem|%>' +
+                            '<b>'+'<%= menuItem.name %>'+'</b><br/>'+
+                            '<%= menuItem.desc %>'+'<br/>'+
+                            '<% end %>' +
+                            '</span>')
+                });
+
+                $("#myMapMarker<%= menu.id %>").hover(
+
+                        function(){
+                            markers[<%= $j %>].setMap(handler.getMap()); //because clusterer removes map property from marker
+                            markers[<%= $j %>].panTo();
+                            google.maps.event.trigger(markers[<%= $j %>].getServiceObject(), 'click');;
+                        });
+            </script>
+            <% $j=$j+1 %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+<script>
+    markers=null;
+    handler.buildMap({ internal: {id: 'mymap'}}, function(){
+        var json_array = [];
+        <% @menus.each do |menu| %>
+        <% @hostName = Host.find(menu.Host_id)  %>
+        var myObj = {};
+        myObj['lat']=<%= @hostName.lat %>;
+        myObj['lng']=<%= @hostName.longi %>;
+        myObj['name']='<%= @hostName.username %>';
+        myObj['infowindow']='<%= @hostName.username %>';
+        json_array.push(myObj);
+        <% end %>
+        markers = handler.addMarkers(json_array);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+    });
+</script>
+
