@@ -1,0 +1,122 @@
+<div class= "container">
+
+  <div class="btn-group">
+    <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"> Write A Review</i></a>
+  </div>
+
+  <div id ="reviewsArea">
+    <%= render 'reviewsSection' %>
+  </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Write a review</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3">
+            <h4>
+              Ambience
+            </h4>
+          </div>
+          <div class="col-md-9">
+            <input id="input-Ambience" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <h4>
+              Social
+            </h4>
+          </div>
+          <div class="col-md-9">
+            <input id="input-Social" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <h4>
+              Cooking
+            </h4>
+          </div>
+          <div class="col-md-9">
+
+            <input id="input-Cooking" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <h4>
+              Unknown
+            </h4>
+          </div>
+          <div class="col-md-9">
+            <input id="input-Unknown" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+          </div>
+        </div>
+
+        <br>
+        <textarea class="form-control" rows="5" id="comment" placeholder="Please write a Comment"></textarea>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id ="ratingSave" type="button" class="btn btn-primary" >Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var field1=0;
+        var field2=0;
+        var field3=0;
+        var field4=0;
+
+        $("#input-Ambience").on("rating.change", function(event, value, caption) {
+            field1=value;
+        });
+
+        $("#input-Social").on("rating.change", function(event, value, caption) {
+            field2=value;
+        });
+
+        $("#input-Cooking").on("rating.change", function(event, value, caption) {
+            field3=value;
+        });
+
+        $("#input-Unknown").on("rating.change", function(event, value, caption) {
+            field4=value;
+        });
+
+        $("#ratingSave").click(function(){
+            var inputBox= $("#comment").val();
+            alert(inputBox);
+            $.ajax({
+                        url: "/reviews/create",
+                        type: "POST",
+                        data: {subcomment: {
+                                     ambience: field1,
+                                     social: field2,
+                                     cooking:field3 ,
+                                     unknown:field4,
+                                      text :inputBox }},
+                    success: function(resp){
+                        $('.modal').modal('hide')
+                    }
+                });
+
+            });
+        });
+</script>

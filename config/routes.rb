@@ -40,7 +40,9 @@ Rails.application.routes.draw do
   get 'editMenu/:id', to: 'menus#editMenu' , :as => :editMenu
   patch 'editMenu/:id', to: 'menus#saveMenuAfterEdit', :as => :updateMenu
   post 'menus/createNew'
-
+  #reviews
+  post 'reviews/create'
+  get 'reviews/index'
 
   get 'order_tables/checkAvailability'
   get 'payments/index'

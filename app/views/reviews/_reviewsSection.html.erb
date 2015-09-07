@@ -1,0 +1,132 @@
+<div class="chat-panel panel panel-default chat-boder chat-panel-head" >
+
+  <div class="panel-heading">
+    <i class="fa fa-comments fa-fw"></i>
+    Reviews
+  </div>
+
+  <div class="panel-body">
+    <ul class="chat-box">
+      <% @reviews.each do |review| %>
+          <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+            <div class="chat-body" onclick="setReviewRead(<%=review.id%>)">
+              <strong >Jack Sparrow</strong>
+              <%	for i in 1..review.overall.to_i %>
+                  <i class="fa fa-star" style="color:#F60"></i>
+              <%	end %>
+              <% if review.overall.ends_with?('.5') %>
+                  <i class="fa fa-star-half" style="color:#F60"></i>
+              <% end %>
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="label label-success">details</span>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                  <li>
+                    <a href="#">
+                      <div>
+                        <strong>Food</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.cooking.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.cooking.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                      </span>
+                      </div>
+                      <div>
+                        <strong>Ambiance</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.ambiance.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.ambiance.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                      </div>
+                      <div>
+                        <strong>Social</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.social.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.social.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                      </div>
+                      <div>
+                        <strong>Else</strong>
+                                                      <span class="pull-right text-muted">
+                                                    	<%	for i in 1..review.x.to_i %>
+                                                               <i class="fa fa-star" style="color:#F60"></i>
+                                                        <%	end %>
+                                                        <% if review.x.ends_with?('.5') %>
+                                                            <i class="fa fa-star-half" style="color:#F60"></i>
+                                                        <% end %>
+                                                </span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <small class="pull-right text-muted">
+                <i class="fa fa-clock-o fa-fw"></i><%= review.created_at.to_s %>
+              </small>
+              <p>
+                <% if (review.status=='new')%>
+                    <b id='reviewBoldTags<%= review.id %>'>
+                <%end%>
+                <% reviewBody = review.text.gsub(/[\n]/,"<br/>") %>
+                <%= reviewBody.html_safe  %>
+                <% if (review.status=='new')%>
+                    </b>
+                <%end%>
+              </p>
+            </div>
+          </li>
+      <%end%>
+    </ul>
+  </div>
+
+
+</div>
+</div>
+
+<script>
+    function setReviewRead(myID) {
+        $.ajax({
+            url: "<%= '/hosts/updateReview' %>", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            data: { reviewID: myID },
+            complete: function() {},
+            success: function(data) {
+                var reviewcount= document.getElementById('unreadReviewCount');
+                reviewcount.innerHTML=data.count
+                var reviewBoldText=document.getElementById('reviewBoldTags'+myID);
+                unwrapChildren(reviewBoldText);
+                alert('done')
+            },
+            error: function() {
+                alert("Ajax error!")
+            }
+        });
+    }
+
+    function unwrapChildren(element) {
+        var parent, node, nextNode;
+
+        parent = element.parentNode;
+        for (node = element.firstChild; node; node = nextNode) {
+            nextNode = node.nextSibling;
+            parent.insertBefore(node, element);
+        }
+        parent.removeChild(element);
+    }
+</script>
