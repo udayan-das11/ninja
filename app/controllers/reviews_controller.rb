@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   # GET /hosts.json
   def index
    @review = Review.new
-   @reviews = Review.all
+   @reviews = Review.all.order(created_at: :desc)
 
   end
 
@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
 
     @review =  Review.new(overall:overall,cooking:params[:subcomment][:cooking],ambiance:params[:subcomment][:ambience],social:params[:subcomment][:social],x:params[:subcomment][:unknown],text:params[:subcomment][:text])
     @review.save
-    @reviews= Review.all
+    @reviews= Review.all.order(created_at: :desc)
     respond_to do |format|
       format.js
     end

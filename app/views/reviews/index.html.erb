@@ -1,14 +1,87 @@
 <div class= "container">
-
-  <div class="btn-group">
-    <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"> Write A Review</i></a>
+  <div class="row">
+    <div class="col-sm-12" id="back-img" align="center" style="background-image:url(/assets/03.jpg)">
+      <img src="/assets/01.jpg" class="img-circle img-responsive img-thumbnail" id="img-size">
+      <h3>Name of User</h3>
+      <h4>
+        User place,<span>City</span>
+        <br/>
+        <i class="fa fa-star" style="color:#FFFF00"></i>
+        <i class="fa fa-star"style="color:#FFFF00" ></i>
+        <i class="fa fa-star" style="color:#FFFF00"></i>
+        <i class="fa fa-star" style="color:#FFFF00"></i>
+        <i class="fa fa-star-half" style="color:#FFFF00"></i>
+      </h4>
+    </div>
   </div>
 
-  <div id ="reviewsArea">
-    <%= render 'reviewsSection' %>
+  <div class="row">
+  <div class="wrapper style3">
+    <article id="portfolio">
+      <header >
+        <h2>Some text about</h2>
+        <p>Proin odio consequat  sapien vestibulum consequat lorem dolore feugiat lorem ipsum dolore.</p>
+      </header>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/bg2.jpg" id="margin"></a>
+              <h3><a href="#">Magna feugiat</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/taj.jpg" id="margin"></a>
+              <h3><a href="#">Veroeros primis</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/bg2.jpg" id="margin"></a>
+              <h3><a href="#">Magna feugiat</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/taj4.jpg" id="margin"></a>
+              <h3><a href="#">Tempus dolore</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/taj1.jpg" id="margin"></a>
+              <h3><a href="#">Feugiat aliquam</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+          <div class="col-sm-4" align="center">
+            <article class="img-thumbnail img-responsive">
+              <a href="#" class="image featured"><img src="images/taj4.jpg" id="margin"></a>
+              <h3><a href="#">Tempus dolore</a></h3>
+              <p>Ornare nulla proin odio consequat.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="btn-group" >
+        <a href="#" class="btn btn-success"  align="left" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"> Write A Review</i></a>
+      </div>
+
+      <div id ="reviewsArea" align="left">
+        <%= render 'reviewsSection' %>
+      </div>
+    </article>
+    </div>
   </div>
-
-
 </div>
 
 <!-- Modal -->
@@ -27,7 +100,7 @@
             </h4>
           </div>
           <div class="col-md-9">
-            <input id="input-Ambience" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+            <input id="input-Ambience" value="0" type="number" class="rating"  min=0 max=5 step=0.5 data-size="xs" >
           </div>
         </div>
 
@@ -38,7 +111,7 @@
             </h4>
           </div>
           <div class="col-md-9">
-            <input id="input-Social" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+            <input id="input-Social" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
           </div>
         </div>
 
@@ -50,7 +123,7 @@
           </div>
           <div class="col-md-9">
 
-            <input id="input-Cooking" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+            <input id="input-Cooking" value="0" type="number" class="rating"  min=0 max=5 step=0.5 data-size="xs" >
           </div>
         </div>
 
@@ -61,7 +134,7 @@
             </h4>
           </div>
           <div class="col-md-9">
-            <input id="input-Unknown" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xs" >
+            <input id="input-Unknown" value="0" type="number" class="rating"  min=0 max=5 step=0.5 data-size="xs" >
           </div>
         </div>
 
@@ -102,7 +175,6 @@
 
         $("#ratingSave").click(function(){
             var inputBox= $("#comment").val();
-            alert(inputBox);
             $.ajax({
                         url: "/reviews/create",
                         type: "POST",

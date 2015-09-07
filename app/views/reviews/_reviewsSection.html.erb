@@ -1,16 +1,13 @@
-<div class="chat-panel panel panel-default chat-boder chat-panel-head" >
 
-  <div class="panel-heading">
-    <i class="fa fa-comments fa-fw"></i>
-    Reviews
-  </div>
 
-  <div class="panel-body">
+
+ <br>
+
     <ul class="chat-box">
       <% @reviews.each do |review| %>
           <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                        <img src="/assets/01.jpg" alt="User" class="img-circle" height="45px" width="45px"/>
                                     </span>
             <div class="chat-body" onclick="setReviewRead(<%=review.id%>)">
               <strong >Jack Sparrow</strong>
@@ -22,7 +19,7 @@
               <% end %>
               <div class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <span class="label label-success">details</span>
+                  <span class="btn btn-sm btn-success">details</span>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
                   <li>
@@ -75,58 +72,17 @@
                   </li>
                 </ul>
               </div>
-              <small class="pull-right text-muted">
-                <i class="fa fa-clock-o fa-fw"></i><%= review.created_at.to_s %>
-              </small>
+
               <p>
-                <% if (review.status=='new')%>
-                    <b id='reviewBoldTags<%= review.id %>'>
-                <%end%>
+
                 <% reviewBody = review.text.gsub(/[\n]/,"<br/>") %>
                 <%= reviewBody.html_safe  %>
-                <% if (review.status=='new')%>
-                    </b>
-                <%end%>
+                <small class="pull-right h5">
+                  <i class="fa fa-clock-o fa-fw"></i><%= review.created_at.to_s %>
+                </small>
               </p>
             </div>
           </li>
       <%end%>
     </ul>
-  </div>
 
-
-</div>
-</div>
-
-<script>
-    function setReviewRead(myID) {
-        $.ajax({
-            url: "<%= '/hosts/updateReview' %>", // Route to the Script Controller method
-            type: "GET",
-            dataType: "json",
-            data: { reviewID: myID },
-            complete: function() {},
-            success: function(data) {
-                var reviewcount= document.getElementById('unreadReviewCount');
-                reviewcount.innerHTML=data.count
-                var reviewBoldText=document.getElementById('reviewBoldTags'+myID);
-                unwrapChildren(reviewBoldText);
-                alert('done')
-            },
-            error: function() {
-                alert("Ajax error!")
-            }
-        });
-    }
-
-    function unwrapChildren(element) {
-        var parent, node, nextNode;
-
-        parent = element.parentNode;
-        for (node = element.firstChild; node; node = nextNode) {
-            nextNode = node.nextSibling;
-            parent.insertBefore(node, element);
-        }
-        parent.removeChild(element);
-    }
-</script>
