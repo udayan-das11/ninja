@@ -1,10 +1,9 @@
 <div class= "container">
   <div class="row">
-    <div class="col-sm-12" id="back-img" align="center" style="background-image:url(/assets/03.jpg)">
-      <img src="/assets/01.jpg" class="img-circle img-responsive img-thumbnail" id="img-size">
-      <h3>Name of User</h3>
-      <h4>
-        User place,<span>City</span>
+    <div class="col-md-12 col-xs-12"  align="center" style="background-image:url(<%=@cover_photo.avatar.url%>)">
+      <%= image_tag(@profile_photo.avatar.url, class: "img-circle img-responsive img-thumbnail",id:"img-size")%>   <h2 id="text-font-user"> <%=@host.username%></h2>
+      <h4 id="text-font-user">
+         <%=@host.name%>,<span> <%=@host.addr%></span>
         <br/>
         <i class="fa fa-star" style="color:#FFFF00"></i>
         <i class="fa fa-star"style="color:#FFFF00" ></i>
@@ -15,74 +14,49 @@
     </div>
   </div>
 
-  <div class="row">
-  <div class="wrapper style3">
-    <article id="portfolio">
-      <header >
-        <h2>Some text about</h2>
-        <p>Proin odio consequat  sapien vestibulum consequat lorem dolore feugiat lorem ipsum dolore.</p>
-      </header>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-4" align="center">
-            <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/bg2.jpg" id="margin"></a>
-              <h3><a href="#">Magna feugiat</a></h3>
-              <p>Ornare nulla proin odio consequat.</p>
-            </article>
-          </div>
-          <div class="col-sm-4" align="center">
-            <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/taj.jpg" id="margin"></a>
-              <h3><a href="#">Veroeros primis</a></h3>
-              <p>Ornare nulla proin odio consequat.</p>
-            </article>
-          </div>
-          <div class="col-sm-4" align="center">
-            <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/bg2.jpg" id="margin"></a>
-              <h3><a href="#">Magna feugiat</a></h3>
-              <p>Ornare nulla proin odio consequat.</p>
-            </article>
-          </div>
-        </div>
+
+        <h2 align="left">
+          Photos of the Kitchen
+        </h2>
         <br/>
         <div class="row">
+        <% @post_attachments.each do |post| %>
           <div class="col-sm-4" align="center">
             <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/taj4.jpg" id="margin"></a>
-              <h3><a href="#">Tempus dolore</a></h3>
+              <a href="#" class="image featured"> <%= image_tag(post.avatar.url, id:"margin")%></a>
+              <h3><a href="#">Magna feugiat</a></h3>
               <p>Ornare nulla proin odio consequat.</p>
             </article>
           </div>
-          <div class="col-sm-4" align="center">
-            <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/taj1.jpg" id="margin"></a>
-              <h3><a href="#">Feugiat aliquam</a></h3>
-              <p>Ornare nulla proin odio consequat.</p>
-            </article>
-          </div>
-          <div class="col-sm-4" align="center">
-            <article class="img-thumbnail img-responsive">
-              <a href="#" class="image featured"><img src="images/taj4.jpg" id="margin"></a>
-              <h3><a href="#">Tempus dolore</a></h3>
-              <p>Ornare nulla proin odio consequat.</p>
-            </article>
-          </div>
+          <%end%>
         </div>
-      </div>
-      <br>
-      <div class="btn-group" >
-        <a href="#" class="btn btn-success"  align="left" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"> Write A Review</i></a>
-      </div>
+        <br/>
+        <h2 align="left">
+          Photos of the Menus
+        </h2>
+        <br/>
+        <div class="row">
+          <% @menu_attachments.each do |menu| %>
+              <div class="col-sm-4" align="center">
+                <article class="img-thumbnail img-responsive">
+                  <a href="#" class="image featured"> <%= image_tag(menu.avatar.url, id:"margin")%></a>
+                  <h3><a href="#">Magna feugiat</a></h3>
+                  <p>Ornare nulla proin odio consequat.</p>
+                </article>
+              </div>
+          <%end%>
+        </div>
 
+      <br>
+      <div align="left">
+          <div class="btn-group" >
+            <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"> Write A Review</i></a>
+          </div>
+      </div>
       <div id ="reviewsArea" align="left">
         <%= render 'reviewsSection' %>
       </div>
-    </article>
-    </div>
   </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

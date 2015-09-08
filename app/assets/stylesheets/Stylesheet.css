@@ -8,6 +8,10 @@
 	height:120px;
 	width:120px;
 }
+#text-font-user{
+    text-shadow: 2px 2px 5px #000000;
+    color:white;
+}
 #margin{
 	height:300px;
 	width:100%;
