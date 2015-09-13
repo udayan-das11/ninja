@@ -562,9 +562,7 @@
 
               <div class="form-group">
                 <label class="col-xs-3 control-label"></label>
-                <div class="col-xs-6">
-                  <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-                </div>
+
               </div>
               <div class="actions">
                 <%= f.submit "Update" %>
@@ -626,7 +624,7 @@
               <div class="form-group">
                 <label class="col-xs-3 control-label"></label>
                 <div class="col-xs-6">
-                  <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+                  <%= link_to 'Sign in with Facebook 2 !!!', host_omniauth_authorize_path(:facebook) %>
                 </div>
               </div>
               <div class="form-group">
@@ -930,10 +928,12 @@ function callSignin() {
         data: {host:{ email: email,password:passwd}},
         complete: function() {},
         success: function(data) {
+            console.log(data);
             var myerrordivtag=document.getElementById("signinHostErrorMessages");
             myerrordivtag.innerHTML="";
             var colClass = document.createElement('p');
             myerrordivtag.appendChild(colClass);
+            window.location = "http://localhost:3000/hosts/askhostdetails";
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);
@@ -986,6 +986,38 @@ function forgotPassword() {
         }
     });
 }
+
+function loginFacebook() {
+    $.ajax({
+        url: "<%= '/hosts/auth/facebook' %>", // Route to the Script Controller method
+        type: "POST",
+        dataType: "json",
+        data: {host:{ email: email}},
+        complete: function() {},
+        success: function(data) {
+            console.log(data)
+            var myerrordivtag=document.getElementById("signinHostErrorMessages");
+            myerrordivtag.innerHTML="";
+            var colClass = document.createElement('p');
+            colClass.innerHTML=data.info;
+            myerrordivtag.appendChild(colClass);
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            var myError = jQuery.parseJSON( xhr.responseText );
+            console.log(myError);
+            var myerrordivtag=document.getElementById("signinHostErrorMessages");
+            myerrordivtag.innerHTML="";
+            var colClass = document.createElement('p');
+            colClass.innerHTML=myError.error;
+            myerrordivtag.appendChild(colClass);
+
+
+        }
+    });
+}
+
+
 
 </script>
 
