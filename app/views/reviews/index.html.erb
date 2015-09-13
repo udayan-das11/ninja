@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12 col-xs-12"  align="center" style="background-image:url(<%=@cover_photo.avatar.url%>)">
       <%= image_tag(@profile_photo.avatar.url, class: "img-circle img-responsive img-thumbnail",id:"img-size")%>   <h2 id="text-font-user"> <%=@host.username%></h2>
-      <h4 id="text-font-user">
+      <h4>
          <%=@host.name%>,<span> <%=@host.addr%></span>
         <br/>
         <i class="fa fa-star" style="color:#FFFF00"></i>
@@ -13,7 +13,7 @@
       </h4>
     </div>
   </div>
-
+     <br>
 
         <h2 align="left">
           Photos of the Kitchen
@@ -35,18 +35,21 @@
           Photos of the Menus
         </h2>
         <br/>
+  <% @menus.each do |menu| %>
+      <p><%= menu.menuName %></p>
+      <% @menu_attachments=  MenuAttachment.where(menu_id:menu.id)%>
         <div class="row">
-          <% @menu_attachments.each do |menu| %>
+          <% @menu_attachments.each do |menuattachment| %>
               <div class="col-sm-4" align="center">
                 <article class="img-thumbnail img-responsive">
-                  <a href="#" class="image featured"> <%= image_tag(menu.avatar.url, id:"margin")%></a>
+                  <a href="#" class="image featured"> <%= image_tag(menuattachment.avatar.url, id:"margin")%></a>
                   <h3><a href="#">Magna feugiat</a></h3>
                   <p>Ornare nulla proin odio consequat.</p>
                 </article>
               </div>
           <%end%>
         </div>
-
+  <%end%>
       <br>
       <div align="left">
           <div class="btn-group" >
@@ -162,6 +165,11 @@
                         $('.modal').modal('hide')
                     }
                 });
+               //reset the field parameter
+               field1=0;
+               field2=0;
+               field3=0;
+               field4=0;
 
             });
         });
