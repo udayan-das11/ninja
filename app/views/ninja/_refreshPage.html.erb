@@ -1,3 +1,11 @@
+<style>
+    #out-line{
+        border:solid 1px #003366;
+        padding-left:10px;
+        padding-bottom:10px;
+        padding-top:10px;
+    }
+</style>
 <div class="container-fluid"id="margin-top">
   <div></div>
   <!-- Metro Tiles - START -->
@@ -46,7 +54,7 @@
                       <div class="col-sm-12 col-xs-12">
                         <div class="row">
                           <div class="col-md-6 pull-left">
-                            Price
+                            &#8377 <%= menu.price %>
                           </div>
                           <div class="col-md-6 pull-right">
                             Something
@@ -64,12 +72,49 @@
                 $('#myMapMarker<%= menu.id %>').tooltipster({
 
                     position: 'right',
-                    content: $('<span>' +
-                            '<% @menuItems.each do |menuItem|%>' +
-                            '<b>'+'<%= menuItem.name %>'+'</b><br/>'+
-                            '<%= menuItem.desc %>'+'<br/>'+
-                            '<% end %>' +
-                            '</span>')
+                    content: $(
+
+                            '<% @menuItems.each do |menuItem|%>'+
+
+                            '<div class="row">'+
+                            '<div class="col-sm-3 col-xs-3">'+
+                            '<h3><%= menuItem.name %></h3>'+
+                            '</div>'+
+                            '<div class="col-sm-3 col-xs-3">'+
+                            ' <h3><%= menuItem.typeItem %></h3>'+
+                            '</div>'+
+                            '</div>'+
+                            '<div class="row">'+
+                            '  <h5 style="margin-left:20px">Description</h5>'+
+                            ' <br/>'+
+                            '<p id="out-line">        '+
+                            '  <%= menuItem.desc %></p>'+
+                            '</div>'+
+                            '<div class="row">'+
+                            '  <div align="center" class="col-sm-3">'+
+                            '  <label>Veg </label>'+
+                            '    <img src="images/banner1.jpg" class="img-circle img-responsive" height="50px" width="50px">'+
+
+                            ' </div>'+
+                            ' <div align="center" class="col-sm-3">'+
+                            ' <label> Non-Veg </label>'+
+                            '   <img src="images/banner1.jpg" class="img-circle img-responsive" height="50px" width="50px">'+
+
+                            '</div>'+
+                            '<div align="center" class="col-sm-3">'+
+                            '<label>Spicy </label>'+
+                            '  <img src="images/banner1.jpg" class="img-circle img-responsive" height="50px" width="50px">'+
+
+                            '</div>'+
+                            '<div align="center" class="col-sm-3">'+
+                            '<label>Non- Spicy</label>'+
+                            '  <img src="images/banner1.jpg" class="img-circle img-responsive" height="50px" width="50px">'+
+
+                            '</div>'+
+
+                            '</div>        '+
+                            '<% end %>'
+                    )
                 });
 
                 $("#myMapMarker<%= menu.id %>").hover(
@@ -89,7 +134,7 @@
 
 
 <script>
-    markers=null;
+markers=null; ~
     handler.buildMap({ internal: {id: 'mymap'}}, function(){
         var json_array = [];
         <% @menus.each do |menu| %>

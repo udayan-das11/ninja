@@ -4,13 +4,26 @@ class HostsController < ApplicationController
 
   # GET /hosts
   # GET /hosts.json
+  def askhostdetails
+    if (host_signed_in?)
+      session[:hostid]=current_host.id;
+      @host=current_host
+      puts('############3 '+session[:hostid].to_s)
+      @post_attachments = PostAttachment.find_by_host_id(session[:hostid])
+      if (@host.lat==nil)
+        puts('&&&&&&&&&&&&&')
+        redirect_to :action => "index", :controller => "hosts", :params => {:host=>{:emailid=>@host.emailid}}
+      else
+        puts('$$$$$$$$$$$$$$$ yo buddy')
+        session[:hostId]=@host.emailid
+        session[:hostUsername]=@host.username
+        redirect_to :action => "mainpage", :controller => "hosts"
+      end
+    end
+  end
   def index
-    session[:hostid]=1
-    @hosts = Host.all
-    @host = Host.new
-    @post_attachments = PostAttachment.find_by_host_id(1)
-    # @post_attachments = PostAttachment.all
-
+    @host = Host.find(session[:hostid])
+    @post_attachments = PostAttachment.find_by_host_id(session[:hostid])
   end
 
   # GET /hosts/1
@@ -116,34 +129,13 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-
-      if (!params[:host][:uuid]&&!Host.exists?(emailid: params[:host][:emailid]))
-        mypass = Digest::SHA1.hexdigest(params[:host][:passwd].to_s)
-        myconfPass = Digest::SHA1.hexdigest(params[:host][:confpasswrd].to_s)
-        if (mypass==myconfPass)
-          @host = Host.new(username:params[:host][:username], emailid:params[:host][:emailid], passwd:mypass, confpasswrd:myconfPass)
-          @host.save
-          session[:hostEmailId]=@host.emailid
-        else
-          flash[:error] = "Passwords do not match"
-        end
-        redirect_to :action => "index", :controller => "hosts"
-      else
-        if (session[:hostuuid])
-          puts('444444')
-          @host = Host.find_by_uuid(session[:hostuuid])
-        else
-          puts('55555')
-          @host = Host.find_by_emailid(session[:hostEmailId])
-        end
+        @host=Host.find(session[:hostid])
+        @host.update(host_params)
         @host.update(lat:params[:lat],longi:params[:lng])
-        puts('#######')
-        if @host.update(host_params)
-          redirect_to :action => "mainpage", :controller => "hosts"
-        else
-          flash[:error] = "Error in saving host"
+        if (!@host.provider)
+          @host.update(provider:'simple')
         end
-      end
+        redirect_to :action => "mainpage", :controller => "hosts"
   end
 
 
@@ -161,8 +153,10 @@ class HostsController < ApplicationController
     end
   end
   def loginFB
-    @host = Host.omniauth(env['omniauth.auth'])
+    @host = Host.omniauthmyauth(env['omniauth.auth'])
     session[:hostuuid]=@host.uuid
+    puts('%%%%%%%%'+@host.id.to_s)
+    session[:hostid]=@host.id
     if (@host.lat==nil)
       puts('&&&&&&&&&&&&&')
       redirect_to :action => "index", :controller => "hosts", :params => {:host=>{:emailid=>@host.emailid,:provider=>'facebook',:uuid=>@host.uuid}}

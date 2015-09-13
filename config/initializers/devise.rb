@@ -259,4 +259,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.omniauth :facebook, '552169418265191', '20828a1a0faf789dca76b384bf09b30e', scope: 'email', info_fields: 'email, name',provider_ignores_state: true,:strategy_class => OmniAuth::Strategies::Facebook,:client_options => {:ssl => {:ca_file => Rails.root.join('mycert.crt').to_s}}
 end

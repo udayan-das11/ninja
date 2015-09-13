@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :hosts, controllers: { registrations: 'registrations',sessions: 'sessions',confirmations: 'confirmations',passwords: 'passwords'}
+  devise_for :hosts, controllers: { registrations: 'registrations',sessions: 'sessions',confirmations: 'confirmations',passwords: 'passwords',omniauth_callbacks: 'omniauth_callbacks' }
   resources :menu_attachments
   resources :post_attachments
   resources :items
   resources :image_gallaries
   resources :users
   get 'hosts/index'
+  get 'hosts/askhostdetails'
   get 'hosts/mainpage'
   get 'ninja/index'
   get 'ninja/trial'
