@@ -25,5 +25,6 @@
 //=require jquery.sidepanel
 //=require jquery.tooltipster.min
 //=require star-rating.min
+//=require main
 
 
