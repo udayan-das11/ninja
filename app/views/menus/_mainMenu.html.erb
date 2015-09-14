@@ -33,13 +33,13 @@
     </div>
 
 
-    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal1">Upload Photos of Menu</button>
-    <button type="button" class="btn btn-sm btn-success" data-toggle="modal"  id="previewPhoto" > Preview Photo</button>
-    <div class="btn btn-sm btn-warning" onClick="addNewItem('itemsList');">Add an Item</div>
+    <button type="button" class="button button--wayra button--border-thick button--text-upper button--size-s" data-toggle="modal" data-target="#myModal1"> Menu Photos</button>
+    <button type="button" class="button button--wayra button--border-thick button--text-upper button--size-s" data-toggle="modal"  id="previewPhoto" > Preview Photo</button>
+    <div class="button button--wayra button--border-thick button--text-upper button--size-s" onClick="addNewItem('itemsList');">Add an Item</div>
     <div id='itemsList' style="padding-top: 10px">
     </div>
 
-    <%= button_to 'Submit Details', menus_create_path, method: :post, :class => 'btn btn-sm btn-primary' %>
+    <%= button_to 'Submit Details', menus_create_path, method: :post, :class => 'button button--wayra button--border-thick button--text-upper button--size-s' %>
 <% end %>
 
 <script>
